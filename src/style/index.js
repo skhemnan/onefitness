@@ -1,12 +1,11 @@
 import React from 'react'
-import { View, Text, Dimensions } from 'react-native'
+import { View, ScrollView, Text, Dimensions, TouchableOpacity, ProgressViewIOSComponent } from 'react-native'
 import {normalize, normalizeHeight} from '../utils'
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window')
 
 /* Colors 
 	Collection of all the colors of the application
 */
-
 const colors = {
 	green: '#1F3132',
 	yellow: '#EFA73E',
@@ -24,67 +23,88 @@ const colors = {
 	- box: applies box properties to view,
 	- footer: puts elements on the bottom of the screen
 */
-const Container = ({ center, col, row, box, bg, footer, style, children }) => {
+const Container = ({ 
+	center, 
+	col, 
+	row, 
+	box, 
+	bg, 
+	footer, 
+	scroll, 
+	color, 
+	style, 
+	children 
+}) => {
 
-	const backgroundStyle = {
-		width: screenWidth,
-		height: screenHeight,
-		backgroundColor: colors.grey
+	const styles = {
+		bg: {
+			width: screenWidth,
+			height: screenHeight,
+			backgroundColor: colors.grey,
+			paddingVertical: screenHeight/15,
+			paddingHorizontal: screenWidth/15
+		},
+		center: {
+			justifyContent: 'center',
+			alignItems: 'center',
+			alignSelf: 'center',
+		},
+		row: {
+			flexDirection: 'row',
+			alignItems: 'center',
+			justifyContent: 'space-evenly',
+			paddingHorizontal: 5,
+			height: normalizeHeight(50),
+			width: normalize(200),
+		},
+		col: {
+			flexDirection: 'column',
+			alignItems: 'center',
+			justifyContent: 'space-evenly',
+			paddingVertical: 5,
+			paddingHorizontal: 20,
+			width: '100%',
+			minimumHeight: screenHeight/11,		
+		},
+		box: {
+			width: screenWidth/2,
+			height: normalizeHeight(120),
+			textAlign: 'center',
+			justifyContent: 'center',
+			alignItems: 'center',
+			flexDirection: 'column',
+			marginVertical: screenHeight/2.5,
+			marginHorizontal: screenWidth/4
+		},
+		footer: {
+			width: '100%',
+			position: 'absolute',
+			bottom: '5%',
+		}
 	}
 
-	const centerStyle = {
-		justifyContent: 'center',
-		alignItems: 'center',
-		alignSelf: 'center',
-	}
+	const comboStyle = [ 
+		bg && styles.bg, 
+		center && styles.center, 
+		row && styles.row, 
+		col && styles.col, 
+		box && styles.box, 
+		footer && styles.footer, 
+		{backgroundColor: color ?? colors.grey},
+		style 
+	]
 
-	const rowStyle={
-		flexDirection: 'row',
-		alignItems: 'center',
-		justifyContent: 'space-evenly',
-		paddingHorizontal: 5,
-		height: normalizeHeight(50),
-		width: normalize(200),
+	if(scroll){
+		return (
+			<ScrollView contentContainerStyle={comboStyle}>
+				{children}
+			</ScrollView>
+		)
+	} else {
+		return (
+			<View style={comboStyle}>{children}</View>
+		)
 	}
-
-	const columnStyle = {
-		flexDirection: 'column',
-		alignItems: 'center',
-		justifyContent: 'space-evenly',
-		paddingVertical: 5,
-		paddingHorizontal: 20,
-		width: '100%',
-		minimumHeight: screenHeight/11,		
-	}
-
-	const boxStyle = {
-    width: screenWidth/2,
-    height: normalizeHeight(120),
-    textAlign: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column',
-		marginVertical: screenHeight/2.5,
-		marginHorizontal: screenWidth/4
-	}
-
-	const footerStyle = {
-		width: '100%',
-		position: 'absolute',
-		bottom: '5%',
-	}
-
-	return (
-		<View style={[
-			bg && backgroundStyle,
-			center && centerStyle,
-			row && rowStyle,
-			col && columnStyle,
-			box && boxStyle,
-			footer && footerStyle,
-			style
-		]}>{children}</View>
-	)
 }
 
 /* Typography
@@ -102,63 +122,245 @@ const Container = ({ center, col, row, box, bg, footer, style, children }) => {
 	- Caption (caption)
 	- Body (body)
 */
-const Typography = ({date, ph, sh, h1, h2, h3, h4, h5, subh, subh2, caption, body, color, style, children}) => {
+const Typography = ({
+	date, 
+	ph, 
+	sh, 
+	h1, 
+	h2, 
+	h3, 
+	h4, 
+	h5,
+	subh, 
+	subh2, 
+	caption, 
+	body, 
+	color, 
+	style, 
+	children
+}) => {
 
-	const dateStyle = {}
-
-	const phStyle = {}
-
-	const shStyle = {}
-
-	const h1Style = {
-		fontSize: normalize(30),
-		fontWeight: 'bold'
+	const styles = {
+		date: {
+			fontFamily: 'Inter-Regular',
+			fontSize: normalize(15),
+			textTransform: 'uppercase'
+		},
+		ph: {
+			fontFamily: 'Inter-Bold',
+			fontSize: normalize(34),
+			textTransform: 'uppercase'
+		},
+		sh: {
+			fontFamily: 'Inter-Regular',
+			fontSize: normalize(18),
+			textTransform: 'uppercase'
+		},
+		h1: {
+			fontFamily: 'Inter-Bold',
+			fontSize: normalize(40),
+		},
+		h2: {
+			fontFamily: 'Inter-Bold',
+			fontSize: normalize(34),
+		},
+		h3: {
+			fontFamily: 'Inter-Regular',
+			fontSize: normalize(22),
+			textTransform: 'uppercase'
+		},
+		h4: {
+			fontFamily: 'Inter-Regular',
+			fontSize: normalize(17)
+		},
+		h5: {
+			fontFamily: 'Inter-Bold',
+			fontSize: normalize(14)
+		},
+		subh: {
+			fontFamily: 'Inter-Regular',
+			fontSize: normalize(22)
+		},
+		subh2: {
+			fontFamily: 'Inter-Bold',
+			fontSize: normalize(22)
+		},
+		caption: {
+			fontFamily: 'Inter-Bold',
+			fontSize: normalize(17),
+			textTransform: 'uppercase'
+		},
+		body: {
+			fontFamily: 'Inter-Regular',
+			fontSize: normalize(12),
+		}
 	}
 
-	const h2Style = {}
-
-	const h3Style = {}
-
-	const h4Style = {}
-
-	const h5Style = {}
-
-	const subhStyle = {}
-
-	const subh2Style = {}
-
-	const captionStyle = {}
-
-	const bodyStyle = {
-		fontSize: normalize(12),
-		marginVertical: 2
-	}
+	const comboStyle = [
+			date && styles.date,
+			ph && styles.ph,
+			sh && styles.sh,
+			h1 && styles.h1,
+			h2 && styles.h2,
+			h3 && styles.h3,
+			h4 && styles.h4,
+			h5 && styles.h5,
+			subh && styles.subh,
+			subh2 && styles.subh2,
+			caption && styles.caption,
+			body && styles.body,
+			style,
+			{color: color ?? 'white'},
+	]
 
 	return (
-		<Text style={[
-			date && dateStyle,
-			ph && phStyle,
-			sh && shStyle,
-			h1 && h1Style,
-			h2 && h2Style,
-			h3 && h3Style,
-			h4 && h4Style,
-			h5 && h5Style,
-			subh && subhStyle,
-			subh2 && subh2Style,
-			caption && captionStyle,
-			body && bodyStyle,
-			style,
-			{color: color}
-		]}>{children}</Text>
+		<Text style={comboStyle}>{children}</Text>
 	)
 }
 
-/* Touchable */
+/* Touchable 
+	All button components in the app, includes the properties:
+	- Login: button for login screen (login)
+	- Signup: button for login screen to sign up (signUp)
+	- Action (S): Default button but small (actionS)
+	- Action (L): Default button but large (actionL)
+	- Body: Button without any border or background (body)
+	- Confirm: Default OK or CONFIRM button (confirm)
+*/
+const Touchable = (props) => {
+	const styles = {
+		login: {
+			borderWidth: 1,
+			borderColor: colors.yellow,
+			minWidth: normalize(250),
+			minHeight: normalizeHeight(40),
+			backgroundColor: colors.yellow,
+			borderRadius: 50,
+			padding: 10,
+			alignItems: 'center',
+			justifyContent: 'center',
+			marginVertical: 7
+		},
+		loginText: {
+			fontSize: normalize(17),
+			fontFamily: 'Inter-Bold',
+			color: colors.green,
+			textTransform: 'uppercase'
+		},
+		signUp: {
+			borderWidth: 3,
+			borderColor: colors.yellow,
+			minWidth: normalize(250),
+			minHeight: normalizeHeight(40),
+			backgroundColor: colors.green,
+			borderRadius: 50,
+			padding: 10,
+			alignItems: 'center',
+			justifyContent: 'center',
+			marginVertical: 7
+		},
+		signUpText: {
+			fontSize: normalize(17),
+			fontFamily: 'Inter-Bold',
+			color: colors.yellow,
+			textTransform: 'uppercase'
+		},
+		actionS: {
+			borderWidth: 1,
+			borderColor: colors.grey,
+			minWidth: normalize(150),
+			minHeight: normalize(30),
+			backgroundColor: colors.grey,
+			borderRadius: 50,
+			padding: 5,
+			alignItems: 'center',
+			justifyContent: 'center',
+			marginVertical:10
+		},
+		actionSText: {
+			fontSize: normalize(15),
+			fontFamily: 'Inter-Regular',
+			color: colors.white,
+			textTransform: 'uppercase'
+		},
+		actionL: {
+			borderWidth: 1,
+			borderColor: colors.green,
+			minWidth: normalize(300),
+			minHeight: normalize(50),
+			backgroundColor: colors.green,
+			borderRadius: 12,
+			padding: 5,
+			alignItems: 'center',
+			justifyContent: 'center',
+			marginVertical:10
+		},
+		actionLText: {
+			fontSize: normalize(22),
+			fontFamily: 'Inter-Regular',
+			color: colors.white,
+			textTransform: 'uppercase'
+		},
+		body: {
+			marginVertical: 10
+		},
+		bodyText: {
+			fontSize: normalize(13),
+			fontFamily: 'Inter-Bold',
+			color: colors.yellow,
+		},
+		confirm: {
+			borderWidth: 1,
+			borderColor: colors.green,
+			minWidth: normalize(275),
+			minHeight: normalize(40),
+			backgroundColor: colors.green,
+			borderRadius: 50,
+			padding: 5,
+			paddingTop: 7.5,
+			alignItems: 'center',
+			justifyContent: 'center',
+			marginVertical:10
+		},
+		confirmText: {
+			fontSize: normalize(20),
+			fontFamily: 'Inter-Bold',
+			color: colors.white,
+			textTransform: 'uppercase'
+		}
+	}
+
+	const comboStyle = [
+		props.login && styles.login,
+		props.signUp && styles.signUp,
+		props.actionS && styles.actionS,
+		props.actionL && styles.actionL,
+		props.body && styles.body,
+		props.confirm && styles.confirm,
+		props.style
+	]
+
+	const comboTextStyle = [
+		props.login && styles.loginText,
+		props.signUp && styles.signUpText,
+		props.actionS && styles.actionSText,
+		props.actionL && styles.actionLText,
+		props.body && styles.bodyText,
+		props.confirm && styles.confirmText,
+		props.textStyle
+	]
+
+	return (
+		<TouchableOpacity {...props} style={comboStyle} activeOpacity={0.6}>
+			<Text style={comboTextStyle}>{props.text}</Text>
+		</TouchableOpacity>
+	)
+}
 
 export {
 	Container as View,
 	Typography as Text,
+	Touchable as Button,
 	colors
 }
 
