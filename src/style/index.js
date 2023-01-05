@@ -12,7 +12,8 @@ const colors = {
 	black: '#000000',
 	grey: '#4E4E4E',
 	darkGrey: '#1C1C1E',
-	white: '#FFFFFF'
+	white: '#FFFFFF',
+	red: '#F64F4F'
 }
 
 /* Container 

@@ -25,8 +25,6 @@ const Card = (props) => {
 			height: normalize(200),
 			backgroundColor: colors.darkGrey,
 			borderRadius: 12,
-			alignItems: 'center',
-			justifyContent: 'center',
 		},
 		actionFooter: {
 			backgroundColor: colors.green,
@@ -44,8 +42,6 @@ const Card = (props) => {
 			height: normalize(100),
 			backgroundColor: colors.darkGrey,
 			borderRadius: 12,
-			alignItems: 'center',
-			justifyContent: 'center',
 		},
 		info: {
 			borderWidth: 1,
@@ -54,8 +50,6 @@ const Card = (props) => {
 			height: normalize(200),
 			backgroundColor: colors.darkGrey,
 			borderRadius: 12,
-			alignItems: 'center',
-			justifyContent: 'center',
 		},
 		button: {
 			width:normalize(200), 
@@ -74,7 +68,7 @@ const Card = (props) => {
 
 	return (
 		<View col style={styles.view}>
-			{props.actionS &&
+			{props.day &&
 				<Text body style={styles.day} color={colors.yellow}>{props.day}</Text>	
 			}
 			<TouchableOpacity style={comboStyle} disabled={props.info} activeOpacity={1}>
@@ -90,7 +84,7 @@ const Card = (props) => {
 				{/* Arrow */}
 				{!props.info &&
 					<View row footer>
-						<Text subh2 style={styles.footer}>{'>'}</Text>
+						<Text h3 style={styles.footer}>{'>'}</Text>
 					</View>	
 				}
 			</TouchableOpacity>

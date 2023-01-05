@@ -15,7 +15,7 @@ const Background = ({children}) => {
 	}
 	return (
 		<View bg style={style.bg}>
-			<LinearGradient colors={[colors.green, colors.black, colors.black, colors.black]} style={style.gradient}></LinearGradient>
+			<LinearGradient colors={[colors.green, colors.black, colors.black, colors.black, colors.black]} style={style.gradient}></LinearGradient>
 			{children}
 		</View>
 	)
