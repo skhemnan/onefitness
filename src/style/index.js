@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, ScrollView, Text, Dimensions, TouchableOpacity, ProgressViewIOSComponent } from 'react-native'
+import { View, ScrollView, Text, Dimensions, TouchableOpacity } from 'react-native'
 import {normalize, normalizeHeight} from '../utils'
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window')
 
@@ -11,6 +11,7 @@ const colors = {
 	yellow: '#EFA73E',
 	black: '#000000',
 	grey: '#4E4E4E',
+	darkGrey: '#1C1C1E',
 	white: '#FFFFFF'
 }
 
@@ -40,9 +41,6 @@ const Container = ({
 		bg: {
 			width: screenWidth,
 			height: screenHeight,
-			backgroundColor: colors.grey,
-			paddingVertical: screenHeight/15,
-			paddingHorizontal: screenWidth/15
 		},
 		center: {
 			justifyContent: 'center',
@@ -52,19 +50,15 @@ const Container = ({
 		row: {
 			flexDirection: 'row',
 			alignItems: 'center',
-			justifyContent: 'space-evenly',
-			paddingHorizontal: 5,
-			height: normalizeHeight(50),
-			width: normalize(200),
+			justifyContent: 'space-between',
+			height: 'auto',
+			width: screenWidth/1.05,
 		},
 		col: {
 			flexDirection: 'column',
-			alignItems: 'center',
-			justifyContent: 'space-evenly',
 			paddingVertical: 5,
-			paddingHorizontal: 20,
-			width: '100%',
-			minimumHeight: screenHeight/11,		
+			paddingHorizontal: 15,
+			width: screenWidth,
 		},
 		box: {
 			width: screenWidth/2,
@@ -90,13 +84,13 @@ const Container = ({
 		col && styles.col, 
 		box && styles.box, 
 		footer && styles.footer, 
-		{backgroundColor: color ?? colors.grey},
+		{backgroundColor: color ?? 'rgba(0,0,0,0)'},
 		style 
 	]
 
 	if(scroll){
 		return (
-			<ScrollView contentContainerStyle={comboStyle}>
+			<ScrollView contentContainerStyle={comboStyle} style={{height: screenHeight}}>
 				{children}
 			</ScrollView>
 		)
@@ -268,8 +262,8 @@ const Touchable = (props) => {
 		actionS: {
 			borderWidth: 1,
 			borderColor: colors.grey,
-			minWidth: normalize(150),
-			minHeight: normalize(30),
+			width: normalize(150),
+			height: normalize(30),
 			backgroundColor: colors.grey,
 			borderRadius: 50,
 			padding: 5,
@@ -286,7 +280,7 @@ const Touchable = (props) => {
 		actionL: {
 			borderWidth: 1,
 			borderColor: colors.green,
-			minWidth: normalize(300),
+			maxWidth: normalize(310),
 			minHeight: normalize(50),
 			backgroundColor: colors.green,
 			borderRadius: 12,
@@ -361,7 +355,9 @@ export {
 	Container as View,
 	Typography as Text,
 	Touchable as Button,
-	colors
+	colors,
+	screenWidth,
+	screenHeight
 }
 
 
