@@ -1,7 +1,9 @@
 import React from 'react';
+import { TouchableOpacity } from 'react-native';
 import Background from '../../components/Background';
 import Card from '../../components/Card';
 import { View, Text, Button, screenHeight } from '../../style';
+import { SVG_ICONS } from '../../constants';
 
 const Home = () => {
 	return (
@@ -9,9 +11,11 @@ const Home = () => {
 		{/* Header */}
 		<View col>
 			<Text date>jan 02</Text>
-			<View row style={{paddingRight:10}}>
+			<View row style={{paddingRight:15}}>
 				<Text ph>monday</Text>
-				<Text h1>O</Text>
+				<TouchableOpacity activeOpacity={0.6}>
+					<View>{SVG_ICONS(40,40).profile.profileIcon}</View>
+				</TouchableOpacity>
 			</View>
 		</View>
 
@@ -28,9 +32,7 @@ const Home = () => {
 								<Text h1>132lb</Text>
 								<Text subh>43.5lb per side</Text>
 							</View>
-							<View center style={{flex: 0.3}}>
-								<Text h1>O</Text>
-							</View>
+							<View center style={{flex: 0.3}}>{SVG_ICONS(110,110).rings.ring75}</View>
 						</View>
 						<View row style={{width: '91%', marginTop: 5}}>
 							<Text h4>5 sets of 5 reps</Text>
@@ -43,9 +45,7 @@ const Home = () => {
 				<Text sh style={{marginVertical: 10}}>upcoming workouts</Text>
 				<Card actionS day='Wednesday'>
 					<View row style={{width: '91%'}}>
-						<View center style={{flex: 0.35}}>
-								<Text h1>O</Text>
-						</View>
+						<View center style={{flex: 0.35}}>{SVG_ICONS(75,75).rings.ring50}</View>
 						<View style={{flex: 0.7, marginTop: 10}}>
 								<View row style={{width: '105%'}}>
 									<Text h4>PULL-UP</Text>
@@ -58,9 +58,7 @@ const Home = () => {
 				</Card>
 				<Card actionS day='Friday'>
 					<View row style={{width: '91%'}}>
-						<View center style={{flex: 0.35}}>
-								<Text h1>O</Text>
-						</View>
+						<View center style={{flex: 0.35}}>{SVG_ICONS(75,75).rings.ring65}</View>
 						<View style={{flex: 0.7, marginTop: 10}}>
 								<View row style={{width: '105%'}}>
 									<Text h4>SQUAT</Text>

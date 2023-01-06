@@ -1,0 +1,25 @@
+<svg width="200" height="205" viewBox="0 0 200 205" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M100 205C73.4783 205 48.043 194.464 29.2893 175.711C10.5357 156.957 -7.37783e-07 131.522 0 105C7.37783e-07 78.4783 10.5357 53.043 29.2893 34.2893C48.043 15.5357 73.4784 5 100 5V45C84.087 45 68.8258 51.3214 57.5736 62.5736C46.3214 73.8258 40 89.087 40 105C40 120.913 46.3214 136.174 57.5736 147.426C68.8258 158.679 84.087 165 100 165L100 205Z" fill="#383736"/>
+<circle cx="98.4001" cy="25" r="20" fill="#FEA421"/>
+<circle cx="98.4001" cy="25" r="20" fill="#FF9D0D"/>
+<g filter="url(#filter0_d_88_147)">
+<circle cx="75" cy="29" r="20" fill="#FF9905"/>
+</g>
+<path d="M100 5C125.163 5 149.402 14.4868 167.88 31.5678C186.358 48.6487 197.717 72.0682 199.692 97.1541C201.666 122.24 194.11 147.148 178.532 166.909C162.953 186.671 140.497 199.832 115.643 203.769C90.7897 207.705 65.3656 202.127 44.4429 188.147C23.5203 174.167 8.63728 152.813 2.763 128.344C-3.11129 103.876 0.455005 78.0929 12.7504 56.1378C25.0458 34.1828 45.1665 17.6703 69.0984 9.89433L81.459 47.9366C67.0999 52.6022 55.0275 62.5097 47.6502 75.6827C40.273 88.8557 38.1332 104.326 41.6578 119.007C45.1824 133.688 54.1122 146.5 66.6658 154.888C79.2194 163.276 94.4739 166.623 109.386 164.261C124.298 161.899 137.772 154.002 147.119 142.146C156.466 130.289 161 115.344 159.815 100.292C158.63 85.2409 151.815 71.1892 140.728 60.9407C129.641 50.6921 115.098 45 100 45V5Z" fill="url(#paint0_angular_88_147)"/>
+<defs>
+<filter id="filter0_d_88_147" x="45" y="0.5" width="60" height="60" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="1.5"/>
+<feGaussianBlur stdDeviation="5"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_88_147"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_88_147" result="shape"/>
+</filter>
+<radialGradient id="paint0_angular_88_147" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(100 105) rotate(90) scale(100)">
+<stop offset="0.40625" stop-color="#FF9700"/>
+<stop offset="1" stop-color="#FBB044"/>
+</radialGradient>
+</defs>
+</svg>

@@ -2,6 +2,7 @@ import React from 'react'
 import { TouchableOpacity } from 'react-native'
 import {View, colors, Text, Button} from '../../style'
 import { normalize } from '../../utils'
+import { SVG_ICONS } from '../../constants'
 
 const Card = (props) => {
 	/* 
@@ -83,8 +84,8 @@ const Card = (props) => {
 				}
 				{/* Arrow */}
 				{!props.info &&
-					<View row footer>
-						<Text h3 style={styles.footer}>{'>'}</Text>
+					<View row footer>	
+						<Text h3 style={styles.footer}>{SVG_ICONS(20,20).nav.chevRight}</Text>
 					</View>	
 				}
 			</TouchableOpacity>
