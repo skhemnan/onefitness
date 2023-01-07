@@ -5,9 +5,12 @@ import Card from '../../components/Card';
 import { View, Text, Button, screenHeight } from '../../style';
 import { SVG_ICONS } from '../../constants';
 
-const Home = () => {
+const Home = ({navigation}) => {
+	const breakDown = () => {
+		navigation.navigate('Breakdown')
+	}
 	return (
-	<Background>
+	<Background style={{paddingVertical: screenHeight/12}}>
 		{/* Header */}
 		<View col>
 			<Text date>jan 02</Text>
@@ -24,7 +27,7 @@ const Home = () => {
 			<View col scroll>
 				{/* Today's workout */}
 				<Text sh style={{marginVertical: 10}}>today's workout</Text>
-				<Card action button='mark as completed' onButton={() => {console.log('mark complete')}}>
+				<Card action button='mark as completed' onButton={() => {console.log('complete')}} onPress={breakDown}>
 					<View col style={{marginVertical: 5, paddingHorizontal: 10}}>
 						<View row style={{width: '91%', marginTop:5}}>
 							<View style={{flex: 0.7}}>
@@ -43,7 +46,7 @@ const Home = () => {
 
 				{/* Upcoming workouts */}
 				<Text sh style={{marginVertical: 10}}>upcoming workouts</Text>
-				<Card actionS day='Wednesday'>
+				<Card actionS day='Wednesday' onPress={breakDown}>
 					<View row style={{width: '91%'}}>
 						<View center style={{flex: 0.35}}>{SVG_ICONS(75,75).rings.ring50}</View>
 						<View style={{flex: 0.7, marginTop: 10}}>
@@ -56,7 +59,7 @@ const Home = () => {
 						</View>
 					</View>
 				</Card>
-				<Card actionS day='Friday'>
+				<Card actionS day='Friday' onPress={breakDown}>
 					<View row style={{width: '91%'}}>
 						<View center style={{flex: 0.35}}>{SVG_ICONS(75,75).rings.ring65}</View>
 						<View style={{flex: 0.7, marginTop: 10}}>

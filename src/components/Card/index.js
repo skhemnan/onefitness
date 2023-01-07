@@ -72,7 +72,7 @@ const Card = (props) => {
 			{props.day &&
 				<Text body style={styles.day} color={colors.yellow}>{props.day}</Text>	
 			}
-			<TouchableOpacity style={comboStyle} disabled={props.info} activeOpacity={1}>
+			<TouchableOpacity {...props} style={comboStyle} disabled={props.info} activeOpacity={1}>
 				{props.children}
 				{/* Footer */}
 				{props.action &&
