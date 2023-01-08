@@ -1,7 +1,7 @@
 import React from 'react'
 import { TouchableOpacity } from 'react-native'
-import {View, colors, Text, Button} from '../../style'
-import { normalize } from '../../utils'
+import {View, colors, Text, Button, screenWidth} from '../../style'
+import { normalize, normalizeHeight } from '../../utils'
 import { SVG_ICONS } from '../../constants'
 
 const Card = (props) => {
@@ -17,15 +17,16 @@ const Card = (props) => {
 	*/
 	
 	const styles = {
-		view: {paddingVertical: 0, paddingHorizontal: 0, marginVertical: 10},
+		view: {paddingVertical: 0, paddingHorizontal: 0, marginVertical: normalizeHeight(5)},
 		day: {width: '92%', textAlign: 'right', marginBottom: 3},
 		action: {
 			borderWidth: 1,
 			borderColor: colors.darkGrey,
-			width: normalize(310),
-			height: normalize(200),
+			width: normalize(screenWidth * 0.79),
+			height: normalizeHeight(170),
 			backgroundColor: colors.darkGrey,
 			borderRadius: 12,
+			alignSelf:'flex-start',
 		},
 		actionFooter: {
 			backgroundColor: colors.green,
@@ -39,23 +40,24 @@ const Card = (props) => {
 		actionS: {
 			borderWidth: 1,
 			borderColor: colors.darkGrey,
-			width: normalize(310),
-			height: normalize(100),
+			width: normalize(screenWidth * 0.79),
+			height: normalize(90),
 			backgroundColor: colors.darkGrey,
 			borderRadius: 12,
+			alignSelf:'flex-start',
 		},
 		info: {
 			borderWidth: 1,
 			borderColor: colors.darkGrey,
-			width: normalize(310),
+			width: normalize(screenWidth * 0.79),
 			height: normalize(200),
 			backgroundColor: colors.darkGrey,
 			borderRadius: 12,
+			alignSelf:'flex-start',
 		},
 		button: {
 			width:normalize(200), 
 			marginLeft: 10, 
-			marginTop: 12
 		},
 		footer: {position: 'absolute', bottom: 2, right: 15}
 	}

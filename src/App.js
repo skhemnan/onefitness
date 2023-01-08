@@ -13,10 +13,9 @@ const App = () => {
   const navigation = useRef()
 
   return (
-  // <Login/>
-  // <Home/>
   <NavigationContainer ref={navigation}>
     <HomeStack/>
+    {/* <Login/> */}
   </NavigationContainer>
   )
 }

@@ -25,18 +25,7 @@ const colors = {
 	- box: applies box properties to view,
 	- footer: puts elements on the bottom of the screen
 */
-const Container = ({ 
-	center, 
-	col, 
-	row, 
-	box, 
-	bg, 
-	footer, 
-	scroll, 
-	color, 
-	style, 
-	children 
-}) => {
+const Container = (props) => {
 
 	const styles = {
 		bg: {
@@ -79,25 +68,25 @@ const Container = ({
 	}
 
 	const comboStyle = [ 
-		bg && styles.bg, 
-		center && styles.center, 
-		row && styles.row, 
-		col && styles.col, 
-		box && styles.box, 
-		footer && styles.footer, 
-		{backgroundColor: color ?? 'rgba(0,0,0,0)'},
-		style 
+		props.bg && styles.bg, 
+		props.center && styles.center, 
+		props.row && styles.row, 
+		props.col && styles.col, 
+		props.box && styles.box, 
+		props.footer && styles.footer, 
+		{backgroundColor: props.color ?? 'rgba(0,0,0,0)'},
+		props.style 
 	]
 
-	if(scroll){
+	if(props.scroll){
 		return (
-			<ScrollView contentContainerStyle={comboStyle} style={{height: screenHeight}}>
-				{children}
+			<ScrollView {...props} contentContainerStyle={comboStyle} style={{height: screenHeight}}>
+				{props.children}
 			</ScrollView>
 		)
 	} else {
 		return (
-			<View style={comboStyle}>{children}</View>
+			<View {...props} style={comboStyle}>{props.children}</View>
 		)
 	}
 }
@@ -143,51 +132,51 @@ const Typography = ({
 		},
 		ph: {
 			fontFamily: 'Inter-Bold',
-			fontSize: normalize(34),
+			fontSize: normalize(27),
 			textTransform: 'uppercase'
 		},
 		sh: {
 			fontFamily: 'Inter-Regular',
-			fontSize: normalize(18),
+			fontSize: normalize(16),
 			textTransform: 'uppercase'
 		},
 		h1: {
 			fontFamily: 'Inter-Bold',
-			fontSize: normalize(40),
+			fontSize: normalize(34),
 		},
 		h2: {
 			fontFamily: 'Inter-Bold',
-			fontSize: normalize(34),
+			fontSize: normalize(27),
 		},
 		h3: {
 			fontFamily: 'Inter-Regular',
-			fontSize: normalize(22),
+			fontSize: normalize(18),
 			textTransform: 'uppercase'
 		},
 		h4: {
 			fontFamily: 'Inter-Regular',
-			fontSize: normalize(17)
+			fontSize: normalize(15)
 		},
 		h5: {
 			fontFamily: 'Inter-Bold',
-			fontSize: normalize(14)
+			fontSize: normalize(13)
 		},
 		subh: {
 			fontFamily: 'Inter-Regular',
-			fontSize: normalize(22)
+			fontSize: normalize(18)
 		},
 		subh2: {
 			fontFamily: 'Inter-Bold',
-			fontSize: normalize(22)
+			fontSize: normalize(18)
 		},
 		caption: {
 			fontFamily: 'Inter-Bold',
-			fontSize: normalize(17),
+			fontSize: normalize(15),
 			textTransform: 'uppercase'
 		},
 		body: {
 			fontFamily: 'Inter-Regular',
-			fontSize: normalize(12),
+			fontSize: normalize(11),
 		}
 	}
 
@@ -263,11 +252,11 @@ const Touchable = (props) => {
 		actionS: {
 			borderWidth: 1,
 			borderColor: colors.grey,
-			width: normalize(150),
 			height: normalize(30),
 			backgroundColor: colors.grey,
 			borderRadius: 50,
 			padding: 5,
+			paddingHorizontal: 15,
 			alignItems: 'center',
 			justifyContent: 'center',
 			marginVertical:10
@@ -281,17 +270,18 @@ const Touchable = (props) => {
 		actionL: {
 			borderWidth: 1,
 			borderColor: colors.green,
-			maxWidth: normalize(310),
 			minHeight: normalize(50),
 			backgroundColor: colors.green,
 			borderRadius: 12,
 			padding: 5,
+			paddingHorizontal: normalize(40),
 			alignItems: 'center',
 			justifyContent: 'center',
-			marginVertical:10
+			marginVertical:10,
+			alignSelf: 'center'
 		},
 		actionLText: {
-			fontSize: normalize(22),
+			fontSize: normalize(17),
 			fontFamily: 'Inter-Regular',
 			color: colors.white,
 			textTransform: 'uppercase'
