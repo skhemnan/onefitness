@@ -1,0 +1,1 @@
+export const periodizationSummary = `Periodization is a method of structured training that helps individuals gradually increase their strength and reach their one rep max, optimizing performance and preventing overtraining or injury.`

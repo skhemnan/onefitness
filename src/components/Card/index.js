@@ -1,8 +1,8 @@
 import React from 'react'
 import { TouchableOpacity } from 'react-native'
-import {View, colors, Text, Button, screenWidth} from '../../style'
-import { normalize, normalizeHeight } from '../../utils'
+import {View, colors, Text, Button} from '../../style'
 import { SVG_ICONS } from '../../constants'
+import styles from './styles'
 
 const Card = (props) => {
 	/* 
@@ -16,52 +16,6 @@ const Card = (props) => {
 		children: props children
 	*/
 	
-	const styles = {
-		view: {paddingVertical: 0, paddingHorizontal: 0, marginVertical: normalizeHeight(5)},
-		day: {width: '92%', textAlign: 'right', marginBottom: 3},
-		action: {
-			borderWidth: 1,
-			borderColor: colors.darkGrey,
-			width: normalize(screenWidth * 0.79),
-			height: normalizeHeight(170),
-			backgroundColor: colors.darkGrey,
-			borderRadius: 12,
-			alignSelf:'flex-start',
-		},
-		actionFooter: {
-			backgroundColor: colors.green,
-			width: '100%',
-			height: '25%',
-			position: 'absolute',
-			bottom: 0,
-			borderBottomRightRadius: 12,
-			borderBottomLeftRadius: 12
-		},
-		actionS: {
-			borderWidth: 1,
-			borderColor: colors.darkGrey,
-			width: normalize(screenWidth * 0.79),
-			height: normalize(90),
-			backgroundColor: colors.darkGrey,
-			borderRadius: 12,
-			alignSelf:'flex-start',
-		},
-		info: {
-			borderWidth: 1,
-			borderColor: colors.darkGrey,
-			width: normalize(screenWidth * 0.79),
-			height: normalize(200),
-			backgroundColor: colors.darkGrey,
-			borderRadius: 12,
-			alignSelf:'flex-start',
-		},
-		button: {
-			width:normalize(200), 
-			marginLeft: 10, 
-		},
-		footer: {position: 'absolute', bottom: 2, right: 15}
-	}
-	
 	const comboStyle = [
 		props.action && styles.action,
 		props.actionS && styles.actionS,
@@ -71,11 +25,10 @@ const Card = (props) => {
 
 	return (
 		<View col style={styles.view}>
-			{props.day &&
-				<Text body style={styles.day} color={colors.yellow}>{props.day}</Text>	
-			}
+			{props.day &&<Text body style={styles.day} color={colors.yellow}>{props.day}</Text>}
 			<TouchableOpacity {...props} style={comboStyle} disabled={props.info} activeOpacity={1}>
 				{props.children}
+
 				{/* Footer */}
 				{props.action &&
 					<View style={styles.actionFooter}>
@@ -84,6 +37,7 @@ const Card = (props) => {
 						}
 					</View>		
 				}
+
 				{/* Arrow */}
 				{!props.info &&
 					<View row footer>	

@@ -1,60 +1,62 @@
 import React from 'react'
 import Background from '../../components/Background';
 import Card from '../../components/Card';
-import { View, Text, Button, colors, screenWidth } from '../../style';
-import { normalize } from '../../utils';
+import { View, Text, Button, colors } from '../../style';
 import { SVG_ICONS } from '../../constants';
+import Ribbon from '../../components/Ribbon';
+import styles from './styles'
+import { disclaimer } from './constants';
 
 const Breakdown = () => {
 	return(
 		<Background>
 			<View col>
 				{/* Ribbon */}
-				<View row style={{height: 75, marginTop: 10}}></View>
+				<View row style={styles.ribbonView}>
+					<Ribbon/>
+				</View>
 
 				{/* Summary Card */}
 				<Text sh>WEEK 4</Text>
-				<Card info style={{height: normalize(180)}}>
-					<View col style={{paddingHorizontal: 10}}>
-						<View row style={{width: '91%', marginTop:5}}>
-							<View center style={{flex: 0.4, margin: 15}}>{SVG_ICONS(120,120).rings.ring75}</View>
-							<View style={{flex: 0.5}}>
-								<Text h2>75%</Text>
+				<Card info style={styles.summaryCard}>
+					<View col style={styles.summaryView}>
+						<View row style={styles.summaryRingRow}>
+							<View center style={styles.summaryRing}>{SVG_ICONS(120,120).rings.ring675}</View>
+							<View style={styles.summaryInfo}>
+								<Text h2>67.5%</Text>
 								<Text h5>to max weight:</Text>
 								<Text h1>160lb</Text>
 							</View>
 						</View>
-						<View row style={{width: '91%', justifyContent: 'space-between', marginTop: -15}}>
-							<Text h4 style={{textAlign: 'center', width: '48%'}}>BENCH PRESS</Text>
-							<Button actionS text="edit max" style={{width: 120, marginRight: '7%'}}/>
+						<View row style={styles.summaryButtonRow}>
+							<Text h4 style={styles.summaryWorkout}>BENCH PRESS</Text>
+							<Button actionS text="edit max" style={styles.editMaxButton}/>
 						</View>
 					</View>
 				</Card>
 
 				{/* Stats */}
-				<View row style={{justifyContent: 'flex-start', marginVertical: 15, marginLeft: 6}}>
-					<View style={{flex: 0.5}}>
+				<View row style={styles.statsRow}>
+					<View style={styles.statsCol}>
 						<Text h5>WORKING WEIGHT</Text>
-						<Text h1 color={colors.yellow}>132lb</Text>
+						<Text h1 color={colors.yellow}>108lb</Text>
 					</View>
-					<View style={{flex: 0.5}}>
+					<View style={styles.statsCol}>
 						<Text h5>REP RANGE</Text>
 						<Text h1 color={colors.yellow}>5
-						<Text h5 color={colors.yellow}>sets</Text>3<Text h5 color={colors.yellow}>reps</Text></Text>
+						<Text h5 color={colors.yellow}>sets</Text>5<Text h5 color={colors.yellow}>reps</Text></Text>
 					</View>
 				</View>
 				<View>
-					<Text h5 style={{marginLeft: 4}}>WEIGHT SPLIT</Text>
-					<Text h1 color={colors.yellow} style={{marginLeft: 4}}>43.5lb{" "}
+					<Text h5 style={styles.weightSplit}>WEIGHT SPLIT</Text>
+					<Text h1 color={colors.yellow} style={styles.weightSplit}>31.5lb{" "}
 					<Text subh>on each side.</Text>
 					</Text>
 				</View>
 
 				{/* Disclaimer */}
-				<Text body style={{marginTop: 40, marginHorizontal: 7}} color={colors.grey}>
-					You have started this program on December 12th, 2022. 
-					After testing your max weight, you are 75% closer to reaching it. 
-					Keep going and you will increase your max weight!
+				<Text body style={styles.disclaimer} color={colors.grey}>
+					{disclaimer('December 12th, 2022')}
 				</Text>
 			</View>
 		</Background>
