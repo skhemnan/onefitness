@@ -4,9 +4,9 @@ import { View, Text, colors } from '../../style'
 import styles from './styles'
 import { data } from './constants'
 
-const Ribbon = () => {
+const Ribbon = ({week}) => {
 
-	const [currentNum, setCurrentNum] = useState(4)
+	const [currentNum, setCurrentNum] = useState(week)
 
 	const Item = ({item}) => {
 		return (
@@ -24,12 +24,14 @@ const Ribbon = () => {
 	}
 
 	return (
-		<FlatList 
-			horizontal 
-			data={data} 
-			renderItem={Item}
-			showsHorizontalScrollIndicator={false}
-		/>
+		<View row style={styles.ribbonView}>
+			<FlatList 
+				horizontal 
+				data={data} 
+				renderItem={Item}
+				showsHorizontalScrollIndicator={false}
+			/>
+		</View>
 	)
 
 }

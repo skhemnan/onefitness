@@ -1,4 +1,4 @@
-import { SVG_ICONS } from '../../constants'
+import { SVG_ICONS } from '../../assets/icons/svg'
 
 export const data = [
 		{num: 0, ring: SVG_ICONS(35,35).rings.ring50},

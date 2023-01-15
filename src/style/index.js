@@ -1,7 +1,9 @@
 import React from 'react'
+import LinearGradient from 'react-native-linear-gradient'
 import { View, ScrollView, Text, Dimensions, TouchableOpacity } from 'react-native'
 import {normalize, normalizeHeight} from '../utils'
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window')
+import { SVG_ICONS } from '../assets/icons/svg'
 
 /* Colors 
 	Collection of all the colors of the application
@@ -119,6 +121,7 @@ const Typography = ({
 	subh2, 
 	caption, 
 	body, 
+	bold,
 	color, 
 	style, 
 	children
@@ -177,6 +180,9 @@ const Typography = ({
 		body: {
 			fontFamily: 'Inter-Regular',
 			fontSize: normalize(11),
+		},
+		bold: {
+			fontFamily: 'Inter-Bold'
 		}
 	}
 
@@ -193,6 +199,7 @@ const Typography = ({
 			subh2 && styles.subh2,
 			caption && styles.caption,
 			body && styles.body,
+			bold && styles.bold,
 			style,
 			{color: color ?? 'white'},
 	]
@@ -342,10 +349,127 @@ const Touchable = (props) => {
 	)
 }
 
+/*  Card
+	Props:
+	action: card type is action
+	actionS: small action card
+	info: info card
+	nav: navigation card (mostly used for settings)
+	text: for nav card
+	style: custom style	
+	children: props children
+*/
+const Card = (props) => {
+	const styles = {
+			view: {paddingVertical: 0, paddingHorizontal: 0, marginVertical: normalizeHeight(5)},
+			day: {width: '92%', textAlign: 'right', marginBottom: 3},
+			action: {
+				borderWidth: 1,
+				borderColor: colors.darkGrey,
+				width: normalize(screenWidth * 0.79),
+				height: normalizeHeight(170),
+				backgroundColor: colors.darkGrey,
+				borderRadius: 12,
+				alignSelf:'flex-start',
+			},
+			actionFooter: {
+				backgroundColor: colors.green,
+				width: '100%',
+				height: '25%',
+				position: 'absolute',
+				bottom: 0,
+				borderBottomRightRadius: 12,
+				borderBottomLeftRadius: 12
+			},
+			actionS: {
+				borderWidth: 1,
+				borderColor: colors.darkGrey,
+				width: normalize(screenWidth * 0.79),
+				height: normalize(90),
+				backgroundColor: colors.darkGrey,
+				borderRadius: 12,
+				alignSelf:'flex-start',
+			},
+			info: {
+				borderWidth: 1,
+				borderColor: colors.darkGrey,
+				width: normalize(screenWidth * 0.79),
+				height: normalize(200),
+				backgroundColor: colors.darkGrey,
+				borderRadius: 12,
+				alignSelf:'flex-start',
+			},
+			button: {
+				width:normalize(200), 
+				marginLeft: 10, 
+			},
+			footer: {position: 'absolute', bottom: 2, right: 15}
+		}
+
+	const comboStyle = [
+		props.action && styles.action,
+		props.actionS && styles.actionS,
+		props.info && styles.info,
+		props.style
+	]
+
+	return (
+		<Container col style={styles.view}>
+			{props.day &&<Typography body style={styles.day} color={colors.yellow}>{props.day}</Typography>}
+			<TouchableOpacity {...props} style={comboStyle} disabled={props.info} activeOpacity={1}>
+				{props.children}
+
+				{/* Footer */}
+				{props.action &&
+					<View style={styles.actionFooter}>
+						{props.button &&
+							<Touchable actionS text={props.button} style={styles.button} onPress={props.onButton}/>	
+						}
+					</View>		
+				}
+
+				{/* Arrow */}
+				{!props.info &&
+					<Container row footer>	
+						<Typography h3 style={styles.footer}>{SVG_ICONS(20,20).nav.chevRight}</Typography>
+					</Container>	
+				}
+			</TouchableOpacity>
+		</Container>
+	)
+
+}
+
+/* Background
+	Props:
+	style: custom style for the container in the background
+	children: children for component
+*/
+const GradientBackground = ({children, style}) => {
+	const styles = {
+			gradient: {
+				height: screenHeight,
+				width: screenWidth,
+				position: 'absolute'	
+			},
+			gradientColor: [colors.green, colors.black, colors.black, colors.black, colors.black]
+	}
+
+	return (
+		<Container bg style={style}>
+			<LinearGradient colors={styles.gradientColor} style={styles.gradient}></LinearGradient>
+			{children}
+		</Container>
+	)
+}
+
+
 export {
 	Container as View,
 	Typography as Text,
 	Touchable as Button,
+	Card as Card,
+	GradientBackground as Background,
 	colors,
 	screenWidth,
 	screenHeight

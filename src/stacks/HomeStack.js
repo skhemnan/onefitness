@@ -1,10 +1,18 @@
 import React from 'react'
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack'
+import { Button, colors, Text, View } from '../style'
+
 
 /* Screens */
 import Home from '../screens/Home'
 import Breakdown from '../screens/Breakdown'
-import { colors, Text } from '../style'
+import Settings from '../screens/Settings'
+import { normalize } from '../utils'
+
+const styles = {
+	header: {width: '100%', paddingHorizontal: 25, paddingTop: 5, justifyContent: 'flex-end', alignItems: 'center'},
+	headerText: {fontSize: normalize(15)}
+}
 
 const HomeStack = () => {
 	const Stack = createStackNavigator()
@@ -22,6 +30,23 @@ const HomeStack = () => {
 				headerTitle: () => <Text h4>Breakdown</Text>,
 				headerTintColor: colors.white,
 				headerShadowVisible: false
+			}}/>
+			<Stack.Screen name="Settings" component={Settings} options={{
+				cardOverlayEnabled: true,
+				...TransitionPresets.ModalPresentationIOS,
+				headerStyle: {
+					backgroundColor: colors.darkGrey,
+				},
+				headerTintColor: colors.yellow,
+				headerShadowVisible: false,
+				header: ({navigation}) => {
+					return (
+						<View row color={colors.darkGrey} style={styles.header}>
+							<Button body onPress={() => navigation.goBack()} text="Done" textStyle={styles.headerText}/>
+						</View>
+					)
+				},
+				gestureDirection: 'vertical'
 			}}/>
 		</Stack.Navigator>
 	)	

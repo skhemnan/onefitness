@@ -5,8 +5,6 @@ import { NavigationContainer } from '@react-navigation/native';
 
 /* Stacks */
 import HomeStack from './stacks/HomeStack';
-
-import Home from './screens/Home';
 import Login from './screens/Login';
 
 const App = () => {
