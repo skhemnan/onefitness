@@ -29,10 +29,10 @@ const InfoCard = ({item}) => {
 				</View>
 				<Text body style={styles.periodizationSummary}>{item.summary}</Text>
 				<View footer style={styles.learnMore}>
-					<Button body text="Learn More"/>
+					<Button body text="Learn More" onPress={() => item.navigate('LearnScreen')}/>
 				</View>
 			</Card>
-	)
+		)
 }
 
 export default InfoCard

@@ -11,11 +11,13 @@ import { SVG_ICONS } from '../assets/icons/svg'
 const colors = {
 	green: '#1F3132',
 	yellow: '#EFA73E',
+	orange: '#FF9700',
 	black: '#000000',
 	grey: '#4E4E4E',
 	darkGrey: '#1C1C1E',
 	white: '#FFFFFF',
-	red: '#F64F4F'
+	red: '#F64F4F',
+	ringGrey: '#383736'
 }
 
 /* Container 
