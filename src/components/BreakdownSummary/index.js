@@ -1,4 +1,5 @@
 import React from 'react'
+import DynamicRing from '../DynamicRing';
 import { SVG_ICONS } from '../../assets/icons/svg';
 import { View, Text, Button, Card } from '../../style';
 import styles from './styles'
@@ -10,7 +11,10 @@ export default BreakdownSummary = ({data}) => {
 			<Card info style={styles.summaryCard}>
 				<View col style={styles.summaryView}>
 					<View row style={styles.summaryRingRow}>
-						<View center style={styles.summaryRing}>{SVG_ICONS(125,125).rings[data.ring]}</View>
+						<View center style={styles.summaryRing}>
+							{/* {SVG_ICONS(125,125).rings[data.ring]} */}
+							<DynamicRing value={data.progression * 100} size={120}/>
+						</View>
 						<View style={styles.summaryInfo}>
 							<Text h2 style={styles.summaryInfoText}>{`${data.progression * 100}%`}</Text>
 							<Text h5 style={styles.summaryInfoText}>to max weight:</Text>
