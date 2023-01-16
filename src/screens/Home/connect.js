@@ -79,6 +79,7 @@ const getData = () => {
 		{ title: "learn about periodization",
 			renderItem: InfoCard,
 			data: [{
+				navigate: navigation.navigate,
 				summary: periodizationSummary
 			}]
 		}
