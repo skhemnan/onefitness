@@ -1,4 +1,5 @@
 import React, {useRef, useEffect} from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { Animated } from 'react-native';
 
 
@@ -9,6 +10,7 @@ import styles from './styles';
 
 const InfoCard = ({item}) => {
 
+	const navigation = useNavigation()
 	const barbellRef = useRef(new Animated.Value(0))
 	useEffect(() => {barbellRef.current?.play(0,40)}, [])
 
@@ -29,7 +31,7 @@ const InfoCard = ({item}) => {
 				</View>
 				<Text body style={styles.periodizationSummary}>{item.summary}</Text>
 				<View footer style={styles.learnMore}>
-					<Button body text="Learn More" onPress={() => item.navigate('LearnScreen')}/>
+					<Button body text="Learn More" onPress={() => navigation.navigate('LearnScreen')}/>
 				</View>
 			</Card>
 		)
