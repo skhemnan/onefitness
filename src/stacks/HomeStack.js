@@ -9,6 +9,7 @@ import Breakdown from '../screens/Breakdown'
 import Settings from '../screens/Settings'
 import LearnScreen from '../screens/LearnScreen'
 import { normalize } from '../utils'
+import TrackNewWorkout from '../screens/TrackNewWorkout'
 
 const styles = {
 	header: {width: '100%', paddingHorizontal: 25, paddingTop: 5, justifyContent: 'flex-end', alignItems: 'center'},
@@ -68,6 +69,7 @@ const HomeStack = () => {
 			<Stack.Screen name="Breakdown" component={Breakdown} options={stackProps}/>
 			<Stack.Screen name="Settings" component={Settings} options={largeModalProps}/>
 			<Stack.Screen name="LearnScreen" component={LearnScreen} options={smallModalProps}/>
+			<Stack.Screen name="TrackNewWorkout" component={TrackNewWorkout} options={smallModalProps}/>
 		</Stack.Navigator>
 		
 	)	

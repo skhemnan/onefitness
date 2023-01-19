@@ -401,6 +401,27 @@ const Card = (props) => {
 				borderRadius: 12,
 				alignSelf:'flex-start',
 			},
+			nav: {
+				borderWidth: 1,
+				borderColor: colors.darkGrey,
+				width: normalize(screenWidth * 0.79),
+				height: normalize(40),
+				backgroundColor: colors.grey,
+				borderRadius: 12,
+				alignSelf: 'center',
+				paddingHorizontal: 15
+			},
+			notNav: {
+				borderWidth: 1,
+				borderColor: colors.darkGrey,
+				width: normalize(screenWidth * 0.79),
+				height: normalize(40),
+				backgroundColor: colors.grey,
+				borderRadius: 12,
+				alignSelf: 'center',
+				paddingHorizontal: 15,
+				paddingVertical: 10
+			},
 			button: {
 				width:normalize(200), 
 				marginLeft: 10, 
@@ -412,6 +433,8 @@ const Card = (props) => {
 		props.action && styles.action,
 		props.actionS && styles.actionS,
 		props.info && styles.info,
+		props.nav && styles.nav,
+		props.notNav && styles.notNav,
 		props.style
 	]
 
@@ -431,7 +454,7 @@ const Card = (props) => {
 				}
 
 				{/* Arrow */}
-				{!props.info &&
+				{(props.actionS || props.action || props.nav) &&
 					<Container row footer>	
 						<Typography h3 style={styles.footer}>{SVG_ICONS(20,20).nav.chevRight}</Typography>
 					</Container>	
