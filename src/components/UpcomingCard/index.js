@@ -1,5 +1,7 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { SVG_ICONS } from '../../assets/icons/svg';
+import { WORKOUTDAYS } from '../../global';
 
 // Style
 import { View, Text, Card } from '../../style';
@@ -7,13 +9,14 @@ import styles from './styles';
 
 const UpcomingCard = ({item}) => {
 
+	const navigation = useNavigation()
 	const navParams = {
 		summary: item.summary,
 		stats: item.stats,
 		programStartDate: item.programStartDate
 	}
 	return (
-			<Card actionS day={item.summary.day} onPress={() => item.navigate('Breakdown', navParams)}>
+			<Card actionS day={WORKOUTDAYS[item.summary.workoutDay]} onPress={() => navigation.navigate('Breakdown', navParams)}>
 				<View row style={styles.upcomingRow}>
 					<View center style={styles.upcomingRing}>{SVG_ICONS(75,75).rings[item.summary.ring]}</View>
 					<View style={styles.upcomingInfo}>
