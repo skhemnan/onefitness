@@ -1,26 +1,29 @@
-import {GoogleSignin} from '@react-native-google-signin/google-signin'
-import auth from '@react-native-firebase/auth'
+/* Redux */
+import { batch, useDispatch } from 'react-redux'
+import { setUser, setNewUser } from '../../redux/action/Auth'
+
+/* Constants */
+import { googleSignIn } from '../../service/Auth'
+
 
 export const useConnect = () => {
-	GoogleSignin.configure({
-		webClientId: '366031428236-satc480gk76mkl679rql2l1up49qsrop.apps.googleusercontent.com'
-	})
 
+	const dispatch = useDispatch()
+
+	// Google Sign In
 	const signinWithGoogle = async () => {
 		try {
-			// Get the users ID token
-			const { idToken } = await GoogleSignin.signIn();
-			// Create a Google credential with the token
-			const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-			// Sign-in the user with the credential
-			let signedIn = await auth().signInWithCredential(googleCredential);
-			console.log(signedIn)
+			let signedIn = await googleSignIn()
+			if(signedIn?.user){
+				batch(() => {
+					dispatch(setNewUser(signedIn?.additionalUserInfo?.isNewUser))	
+					dispatch(setUser(signedIn?.user))
+				})
+			}
 		} catch (error) {
 			console.log('SIGN IN ERROR', error?.message, error)	
 		}
 	}
 	
-	return {
-		signinWithGoogle
-	}
+	return { signinWithGoogle }
 }
