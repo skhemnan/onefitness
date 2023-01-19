@@ -17,9 +17,9 @@ export default BreakdownStats = ({data}) => {
 				</View>
 			</View>
 			<View>
-				<Text h5 style={styles.weightSplit}>{data.splitWeight ? 'WEIGHT SPLIT' : 'ADDED WEIGHT'}</Text>
-				<Text h1 color={colors.yellow} style={styles.weightSplit}>{`${data.splitWeight ? data.splitWeight : data.addedWeight}lb`}{" "}
-				<Text subh>{data.splitWeight ? 'on each side' : 'plus body weight'}</Text>
+				<Text h5 style={styles.weightSplit}>{data.splitWeight ? 'WEIGHT SPLIT' : 'ASSISTED WEIGHT'}</Text>
+				<Text h1 color={colors.yellow} style={styles.weightSplit}>{`${data.splitWeight ? data.splitWeight : data.addedWeight * -1}lb`}{" "}
+				<Text subh>{data.splitWeight ? 'on each side' : 'assistance'}</Text>
 				</Text>
 			</View>	
 		</>

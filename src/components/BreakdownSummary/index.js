@@ -12,12 +12,11 @@ export default BreakdownSummary = ({data}) => {
 				<View col style={styles.summaryView}>
 					<View row style={styles.summaryRingRow}>
 						<View center style={styles.summaryRing}>
-							{/* {SVG_ICONS(125,125).rings[data.ring]} */}
 							<DynamicRing value={data.progression * 100} size={120}/>
 						</View>
 						<View style={styles.summaryInfo}>
-							<Text h2 style={styles.summaryInfoText}>{`${data.progression * 100}%`}</Text>
-							<Text h5 style={styles.summaryInfoText}>to max weight:</Text>
+							<Text h2 style={styles.summaryInfoText}>{data.progression != 1 ? `${data.progression * 100}%` : 'Reached'}</Text>
+							<Text h5 style={styles.summaryInfoText}>{`${data.progression != 1 ? 'to ' : ''}max weight${data.progression == 1 ? '!' : ':'}`}</Text>
 							<Text h1 style={styles.summaryInfoText}>{`${data.maxWeight}lb`}</Text>
 						</View>
 					</View>
