@@ -101,3 +101,14 @@ export const WORKOUTDAYS = {
 	]
 */
 
+// EXERCISES
+// const staticExercises = [
+// 	{ id: '39d75dbe-e2b4-4652-8928-92f0273c7a1a', max: 160, progress: 0.75, wId: 'JDGZB1SmYW6j73x2tAiG', workoutDay: 3 },
+// 	{ id: '57ea0797-7dd4-402b-ae60-0372d962e4fe', max: 130, progress: 0.5, wId: '0XF0LFX2gXunVk2ctTZi', workoutDay: 1 },
+// 	{ id: 'c2984417-b114-4bad-be4e-a3b37618cd9a', max: 170, progress: 0.8, wId: 'kRrYdGp5JqEsF0vI7qEH', workoutDay: 5 }	
+// ]
+
+// WORKOUTS
+// '0XF0LFX2gXunVk2ctTZi': { bodyWeight: false, name: 'SQUAT', type: 'period' },
+// 'JDGZB1SmYW6j73x2tAiG': { bodyWeight: false, name: 'BENCH PRESS', type: 'period' },
+// 'kRrYdGp5JqEsF0vI7qEH': { bodyWeight: true, name: 'PULL-UP', type: 'period' }

@@ -24,7 +24,7 @@ export default NoWorkoutToday = () => {
 					/>
 				</View>	
 				<Text subh>{!workoutDays.includes(today) ? 'No workouts today.' : "Well Done!"}</Text>
-				<Text h4>{!workoutDays.includes(today) ? 'Enjoy the rest day.' : "You've completed all your workouts!"}</Text>
+				<Text h4 style={{textAlign: 'center'}}>{!workoutDays.includes(today) ? 'Enjoy the rest day.' : "You've completed all your workouts for today!"}</Text>
 			</View>
 		</Card>
 	)

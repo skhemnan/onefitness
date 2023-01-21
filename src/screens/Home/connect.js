@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 
 
 // Components
@@ -15,25 +15,28 @@ import moment from 'moment';
 
 // Redux
 import { useSelector } from 'react-redux';
+import { getWorkoutData } from '../../service/Workout';
 
 export default useConnect = () => {
 
 const [workoutData, setWorkoutData] = useState([])
-const [exercises, setExercises] = useState([])
 let WORKOUT = useSelector(state => state.Workout)
 
+const getExercises = async () => {
+	if(WORKOUT.exercises.length == 0 || Object.keys(WORKOUT.workouts).length == 0){
+		await getWorkoutData()
+	}
+}
 
-// Sample data from Firebase when querying exercises
-useEffect(() => {setExercises([
-	{ max: 160, progress: 0.75, wId: 'JDGZB1SmYW6j73x2tAiG', workoutDay: 3, startDate: 'December 10th, 2022' },
-	{ max: 130, progress: 0.5, wId: '0XF0LFX2gXunVk2ctTZi', workoutDay: 1, startDate: 'December 12th, 2022' },
-	{ max: 170, progress: 0.8, wId: 'kRrYdGp5JqEsF0vI7qEH', workoutDay: 5, startDate: 'December 14th, 2022' }	
-])},[])
-useEffect(() => {setWorkoutData(getData(exercises))}, [exercises])
+useEffect(() => {getExercises()},[])
+useEffect(() => {	
+	if(WORKOUT.exercises.length != 0){
+		setWorkoutData(getData(WORKOUT.exercises, WORKOUT.workouts))	
+	}
+},[WORKOUT.exercises])
 
 // Function mutate firebase data
-const getData = (exercises) => {
-
+const getData = (exercises, workouts) => {
 	// Mutate each exercise object and add the data necessary
 	let currentDay = moment().day()
 	let bodyWeight = WORKOUT.bodyWeight
@@ -42,11 +45,17 @@ const getData = (exercises) => {
 	let upcomingDataBefore = []
 
 	exercises.forEach(x => {
+
+		// CODE FOR UPDATING PROGRESS AFTER COMPLETION
+		// let curIndex = Object.keys(PROGRESSION_DATA).indexOf(`${x.progress}`)
+		// let nextProgress = Object.keys(PROGRESSION_DATA)[curIndex + 1]
+
 		let exerciseData = {
+			id: x.id,
 			summary: {
 				week: PROGRESSION_DATA[x.progress].week,
-				workout: WORKOUT.workouts[x.wId]?.name,
-				workoutDay: x.workoutDay,
+				workout: workouts[x.wId]?.name,
+				workoutDay: moment(x.nextWorkoutDate.toDate()).day(),
 				maxWeight: x.max,
 				progression: x.progress,
 				ring: PROGRESSION_DATA[x.progress].ring
@@ -57,11 +66,11 @@ const getData = (exercises) => {
 				reps: PROGRESSION_DATA[x.progress].reps,
 				...(x.wId == 'kRrYdGp5JqEsF0vI7qEH' ? {addedWeight: Math.ceil((x.max * x.progress) - bodyWeight)} : {splitWeight: (x.max - 45)/2})
 			},
-			programStartDate: x.startDate
 		}
-		x.workoutDay == currentDay ? todayData.push(exerciseData) : 
-			(x.workoutDay < currentDay ? upcomingDataBefore.push(exerciseData) : upcomingDataAfter.unshift(exerciseData))
-	})
+		moment(x.nextWorkoutDate.toDate()).format('DD MMMM YYYY') == moment().format('DD MMMM YYYY') ? todayData.push(exerciseData): 
+		(x.workoutDay < currentDay ? upcomingDataBefore.push(exerciseData): 
+		 upcomingDataAfter.unshift(exerciseData))
+ 	})
 
 	// Sorting days before and after today
 	upcomingDataAfter.sort((a,b) => a.summary.workoutDay - b.summary.workoutDay)
@@ -88,6 +97,6 @@ const handleSectionFooter = ({section}) => {
 	}
 }
 
-	return { workoutData, handleSectionFooter }
+	return { workoutData, handleSectionFooter, setWorkoutData }
 }
 

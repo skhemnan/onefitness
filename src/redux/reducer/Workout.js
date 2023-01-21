@@ -6,24 +6,8 @@ export const WORKOUT_REDUCER_CASES = {
 
 const initialState = {
 	exercises: [],
-	workouts: {
-		'0XF0LFX2gXunVk2ctTZi': {
-			bodyWeight: false,
-			name: 'SQUAT',
-			type: 'period'
-		},
-		'JDGZB1SmYW6j73x2tAiG': {
-			bodyWeight: false,
-			name: 'BENCH PRESS',
-			type: 'period'
-		},
-		'kRrYdGp5JqEsF0vI7qEH': {
-			bodyWeight: false,
-			name: 'PULL-UP',
-			type: 'period'
-		}
-	},
-	bodyWeight: 157
+	workouts: {},
+	bodyWeight: null
 }
 
 export default (state = initialState, action) => {
