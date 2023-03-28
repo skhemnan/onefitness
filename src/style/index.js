@@ -121,6 +121,7 @@ const Typography = ({
 	h5,
 	subh, 
 	subh2, 
+	contact,
 	caption, 
 	body, 
 	bold,
@@ -170,6 +171,10 @@ const Typography = ({
 			fontFamily: 'Inter-Regular',
 			fontSize: normalize(18)
 		},
+		contact: {
+			fontFamily: 'Inter-Regular',
+			fontSize: normalize(22)
+		},
 		subh2: {
 			fontFamily: 'Inter-Bold',
 			fontSize: normalize(18)
@@ -199,6 +204,7 @@ const Typography = ({
 			h5 && styles.h5,
 			subh && styles.subh,
 			subh2 && styles.subh2,
+			contact && styles.contact,
 			caption && styles.caption,
 			body && styles.body,
 			bold && styles.bold,
@@ -403,30 +409,43 @@ const Card = (props) => {
 			},
 			nav: {
 				borderWidth: 1,
-				borderColor: colors.darkGrey,
+				borderColor: colors.ringGrey,
 				width: normalize(screenWidth * 0.79),
 				height: normalize(40),
-				backgroundColor: colors.grey,
+				backgroundColor: colors.ringGrey,
 				borderRadius: 12,
 				alignSelf: 'center',
-				paddingHorizontal: 15
+				paddingHorizontal: 10,
+				paddingVertical: 10
 			},
 			notNav: {
 				borderWidth: 1,
-				borderColor: colors.darkGrey,
+				borderColor: colors.ringGrey,
 				width: normalize(screenWidth * 0.79),
 				height: normalize(40),
-				backgroundColor: colors.grey,
+				backgroundColor: colors.ringGrey,
 				borderRadius: 12,
 				alignSelf: 'center',
 				paddingHorizontal: 15,
 				paddingVertical: 10
 			},
+			contact: {
+				borderWidth: 1,
+				borderColor: colors.ringGrey,
+				width: normalize(screenWidth * 0.79),
+				height: normalize(85),
+				backgroundColor: colors.ringGrey,
+				borderRadius: 12,
+				alignSelf: 'center',
+				paddingHorizontal: 15,
+				paddingTop: 20
+			},
 			button: {
 				width:normalize(200), 
 				marginLeft: 10, 
 			},
-			footer: {position: 'absolute', bottom: 2, right: 15}
+			footer: {position: 'absolute', bottom: 2, right: 15},
+			navArrow: {position: 'absolute', bottom: 10, right: 0}
 		}
 
 	const comboStyle = [
@@ -435,13 +454,14 @@ const Card = (props) => {
 		props.info && styles.info,
 		props.nav && styles.nav,
 		props.notNav && styles.notNav,
+		props.contact && styles.contact,
 		props.style
 	]
 
 	return (
 		<Container col style={styles.view}>
 			{props.day &&<Typography body style={styles.day} color={colors.yellow}>{props.day}</Typography>}
-			<TouchableOpacity {...props} style={comboStyle} disabled={props.info} activeOpacity={1}>
+			<TouchableOpacity {...props} style={comboStyle} disabled={props.info} activeOpacity={0.7}>
 				{props.children}
 
 				{/* Footer */}
@@ -456,7 +476,7 @@ const Card = (props) => {
 				{/* Arrow */}
 				{(props.actionS || props.action || props.nav) &&
 					<Container row footer>	
-						<Typography h3 style={styles.footer}>{SVG_ICONS(20,20).nav.chevRight}</Typography>
+						<Typography h3 style={props.nav ? styles.navArrow : styles.footer}>{SVG_ICONS(20,20).nav.chevRight}</Typography>
 					</Container>	
 				}
 			</TouchableOpacity>
