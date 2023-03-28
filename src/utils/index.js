@@ -7,3 +7,11 @@ export function normalize(size){
 export function normalizeHeight(size){
 	return hp(size * 0.15)
 }
+
+export function splitWeight(weight){
+	return 2.5 * Math.ceil(((weight - 45)/2)/2.5)
+}
+
+export function addedWeight(weight, bodyWeight){
+	return 2.5 * Math.ceil((weight - bodyWeight)/2.5)
+}

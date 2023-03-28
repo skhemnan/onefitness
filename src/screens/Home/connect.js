@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import React, {useState, useEffect} from 'react';
 
 
 // Components
@@ -16,6 +16,9 @@ import moment from 'moment';
 // Redux
 import { useSelector } from 'react-redux';
 import { getWorkoutData } from '../../service/Workout';
+
+// Utils
+import { splitWeight, addedWeight } from '../../utils';
 
 export default useConnect = () => {
 
@@ -64,10 +67,10 @@ const getData = (exercises, workouts) => {
 				workingWeight: x.max * x.progress,
 				sets: PROGRESSION_DATA[x.progress].sets,
 				reps: PROGRESSION_DATA[x.progress].reps,
-				...(x.wId == 'kRrYdGp5JqEsF0vI7qEH' ? {addedWeight: Math.ceil((x.max * x.progress) - bodyWeight)} : {splitWeight: (x.max - 45)/2})
+				...(x.wId == 'kRrYdGp5JqEsF0vI7qEH' ? {addedWeight: Math.ceil((x.max * x.progress) - bodyWeight)} : {splitWeight: splitWeight(x.max * x.progress)})
 			},
 		}
-		moment(x.nextWorkoutDate.toDate()).format('DD MMMM YYYY') == moment().format('DD MMMM YYYY') ? todayData.push(exerciseData): 
+		moment(x.nextWorkoutDate.toDate()).format('DD MMMM YYYY') <= moment().format('DD MMMM YYYY') && moment(x.nextWorkoutDate.toDate()).format('dddd') == moment().format('dddd') ? todayData.push(exerciseData): 
 		(x.workoutDay < currentDay ? upcomingDataBefore.push(exerciseData): 
 		 upcomingDataAfter.unshift(exerciseData))
  	})

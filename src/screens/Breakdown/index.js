@@ -7,23 +7,16 @@ import Ribbon from '../../components/Ribbon';
 import BreakdownSummary from '../../components/BreakdownSummary';
 import BreakdownStats from '../../components/BreakdownStats';
 import BreakdownDisclaimer from '../../components/BreakdownDisclaimer';
-import moment from 'moment';
-
  
 const Breakdown = ({route}) => {
 
-	let startDate = moment()
-									.subtract(route?.params?.summary?.week, 'weeks')
-									.startOf('week')
-									.add(route?.params?.summary?.workoutDay, 'days')
-									.format('dddd, MMMM DD YYYY')
-
+	const {startDate, currentNum, setCurrentNum, data} = useConnect({route})
 	return(
 		<Background>
 			<View col>
-				<Ribbon week={route?.params?.summary?.week}/>
-				<BreakdownSummary data={route?.params?.summary}/>
-				<BreakdownStats data={route?.params?.stats}/>
+				<Ribbon currentNum={currentNum} setCurrentNum={setCurrentNum}/>
+				<BreakdownSummary data={data.summary}/>
+				<BreakdownStats data={data.stats}/>
 				<BreakdownDisclaimer date={startDate} progress={route?.params?.summary?.progression}/>
 			</View>
 		</Background>

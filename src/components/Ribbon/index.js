@@ -4,9 +4,7 @@ import { View, Text, colors } from '../../style'
 import styles from './styles'
 import { data } from './constants'
 
-const Ribbon = ({week}) => {
-
-	const [currentNum, setCurrentNum] = useState(week)
+const Ribbon = ({currentNum, setCurrentNum}) => {
 
 	const Item = ({item}) => {
 		return (

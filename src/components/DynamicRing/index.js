@@ -11,7 +11,7 @@ export default DynamicRing = ({value, size}) => {
 			if(isFocused){
 				ringRef.current.reAnimate(1, value, 1500, Easing.out(Easing.exp))
 			} 	
-		},[isFocused])
+		},[isFocused, value])
 
 		return (
 			<AnimatedCircularProgress
