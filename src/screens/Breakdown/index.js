@@ -1,5 +1,7 @@
 import React from 'react'
 import useConnect from './connect'
+import { useNavigation } from '@react-navigation/native';
+
 
 // Components
 import { View, Background } from '../../style';
@@ -11,11 +13,15 @@ import BreakdownDisclaimer from '../../components/BreakdownDisclaimer';
 const Breakdown = ({route}) => {
 
 	const {startDate, currentNum, setCurrentNum, data} = useConnect({route})
+	const navigation = useNavigation()
+
+	onEditMax = () => {navigation.navigate('EditMax', {data: data})}
+
 	return(
 		<Background>
 			<View col>
 				<Ribbon currentNum={currentNum} setCurrentNum={setCurrentNum}/>
-				<BreakdownSummary data={data.summary}/>
+				<BreakdownSummary data={data.summary} onEditMax={onEditMax}/>
 				<BreakdownStats data={data.stats}/>
 				<BreakdownDisclaimer date={startDate} progress={route?.params?.summary?.progression}/>
 			</View>

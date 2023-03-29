@@ -23,7 +23,14 @@ import { splitWeight, addedWeight } from '../../utils';
 export default useConnect = () => {
 
 const [workoutData, setWorkoutData] = useState([])
+const [refreshing, setRefreshing] = useState(false)
 let WORKOUT = useSelector(state => state.Workout)
+
+const onRefresh = async () => {
+	setRefreshing(true)
+	await getExercises()
+	setRefreshing(false)
+}
 
 const getExercises = async () => {
 	if(WORKOUT.exercises.length == 0 || Object.keys(WORKOUT.workouts).length == 0){
@@ -70,7 +77,7 @@ const getData = (exercises, workouts) => {
 				...(x.wId == 'kRrYdGp5JqEsF0vI7qEH' ? {addedWeight: Math.ceil((x.max * x.progress) - bodyWeight)} : {splitWeight: splitWeight(x.max * x.progress)})
 			},
 		}
-		moment(x.nextWorkoutDate.toDate()).format('DD MMMM YYYY') <= moment().format('DD MMMM YYYY') && moment(x.nextWorkoutDate.toDate()).format('dddd') == moment().format('dddd') ? todayData.push(exerciseData): 
+		moment(x.nextWorkoutDate.toDate()).isBefore(moment()) && moment(x.nextWorkoutDate.toDate()).format('dddd') == moment().format('dddd') ? todayData.push(exerciseData): 
 		(x.workoutDay < currentDay ? upcomingDataBefore.push(exerciseData): 
 		 upcomingDataAfter.unshift(exerciseData))
  	})
@@ -100,6 +107,6 @@ const handleSectionFooter = ({section}) => {
 	}
 }
 
-	return { workoutData, handleSectionFooter, setWorkoutData }
+	return { workoutData, handleSectionFooter, setWorkoutData, onRefresh, refreshing }
 }
 

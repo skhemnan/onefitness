@@ -1,6 +1,6 @@
 import React from 'react'
 import LinearGradient from 'react-native-linear-gradient'
-import { View, ScrollView, Text, Dimensions, TouchableOpacity } from 'react-native'
+import { View, ScrollView, Text, Dimensions, TouchableOpacity, TextInput } from 'react-native'
 import {normalize, normalizeHeight} from '../utils'
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window')
 import { SVG_ICONS } from '../assets/icons/svg'
@@ -508,6 +508,27 @@ const GradientBackground = ({children, style}) => {
 	)
 }
 
+/* Input
+	Props:
+	- style: custom style
+*/
+
+const Input = (props) => {
+	const styles = {
+		height: '90%',
+		width: '97%',
+		alignSelf: 'center',
+		fontSize: normalize(30),
+		textAlign: 'center',
+		fontFamily: 'Inter-Regular',
+		color: colors.white
+	}
+
+	return (
+		<TextInput {...props} style={[styles, props.style]} keyboardType="number-pad"/>
+	)
+}
+
 
 export {
 	Container as View,
@@ -515,6 +536,7 @@ export {
 	Touchable as Button,
 	Card as Card,
 	GradientBackground as Background,
+	Input,
 	colors,
 	screenWidth,
 	screenHeight

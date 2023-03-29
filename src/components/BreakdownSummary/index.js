@@ -4,7 +4,7 @@ import { SVG_ICONS } from '../../assets/icons/svg';
 import { View, Text, Button, Card } from '../../style';
 import styles from './styles'
 
-export default BreakdownSummary = ({data}) => {
+export default BreakdownSummary = ({data, onEditMax}) => {
 	return (
 		<>
 			<Text sh>{`WEEK ${data.week}`}</Text>
@@ -22,7 +22,7 @@ export default BreakdownSummary = ({data}) => {
 					</View>
 					<View row style={styles.summaryButtonRow}>
 						<Text h3 bold style={styles.summaryWorkout}>{data.workout}</Text>
-						<Button actionS text="edit max" style={styles.editMaxButton}/>
+							<Button actionS text="edit max" style={styles.editMaxButton} onPress={onEditMax}/>
 					</View>
 				</View>
 			</Card>

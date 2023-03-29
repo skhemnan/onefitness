@@ -22,8 +22,6 @@ export const getWorkoutData = async () => {
 			store.dispatch(setWorkouts(workoutObj))
 		})
 
-		console.log('FIREBASE EXERCISE DATA', moment(userData?.data().exercises[0].nextWorkoutDate.toDate()).format('dddd, MMMM DD YYYY'))
-
 		return {
 			workouts: workoutObj,
 			exercises: userData?.data().exercises

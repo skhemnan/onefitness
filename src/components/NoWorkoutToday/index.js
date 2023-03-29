@@ -19,7 +19,7 @@ export default NoWorkoutToday = () => {
 							require(`../../assets/lottie/cloud.json`) :
 							require(`../../assets/lottie/muscle.json`)
 						} 
-						loop={false}
+						loop={!workoutDays.includes(today) ? true : false}
 						autoPlay
 					/>
 				</View>	

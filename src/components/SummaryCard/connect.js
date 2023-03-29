@@ -38,6 +38,7 @@ export const useConnect = ({item}) => {
 
 		// Send updated exercise to firebase and update on redux	
 		await store.dispatch(setExercises(newExercises))
+		// await firestore().collection('users').doc(uid).update({exercises: newExercises})
 
 		// console.log('CHANGING EXERCISE', exercises[found])
 		// console.log('TO', updatedExercise)

@@ -10,6 +10,7 @@ import Settings from '../screens/Settings'
 import LearnScreen from '../screens/LearnScreen'
 import { normalize } from '../utils'
 import TrackNewWorkout from '../screens/TrackNewWorkout'
+import EditMax from '../screens/EditMax'
 
 const styles = {
 	header: {width: '100%', paddingHorizontal: 25, paddingTop: 5, justifyContent: 'flex-end', alignItems: 'center'},
@@ -70,6 +71,7 @@ const HomeStack = () => {
 			<Stack.Screen name="Settings" component={Settings} options={largeModalProps}/>
 			<Stack.Screen name="LearnScreen" component={LearnScreen} options={smallModalProps}/>
 			<Stack.Screen name="TrackNewWorkout" component={TrackNewWorkout} options={smallModalProps}/>
+			<Stack.Screen name="EditMax" component={EditMax} options={smallModalProps}/>
 		</Stack.Navigator>
 		
 	)	

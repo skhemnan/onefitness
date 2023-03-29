@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react'
 import { useSelector } from 'react-redux';
+import { useIsFocused } from '@react-navigation/native';
 
 // Constants
 import { PROGRESSION_DATA } from '../../global';
@@ -9,12 +10,23 @@ import { splitWeight, addedWeight } from '../../utils';
 import moment from 'moment';
 
 export default useConnect = ({route}) => {
+	const isFocused = useIsFocused()
+	
 	const {bodyWeight} = useSelector(state => state.Workout)
 	const [currentNum, setCurrentNum] = useState(route?.params?.summary?.week)
 	const [data, setData] = useState({
-		summary: route?.params?.summary,
-		stats: route?.params?.stats,
-	})
+				summary: route?.params?.summary,
+				stats: route?.params?.stats,
+			})
+
+	useEffect(() => {
+		if(isFocused){
+			setData({
+				summary: route?.params?.summary,
+				stats: route?.params?.stats,
+			})
+		}
+	},[isFocused])
 
 	/* 
 
@@ -73,7 +85,8 @@ export default useConnect = ({route}) => {
 		setData(newData)
 	}
 
-	useEffect(() => { updateBreakdown() },[currentNum])
+	useEffect(() => { updateBreakdown() },[currentNum, data.summary.maxWeight])
+	useEffect(() => { setCurrentNum(data.summary.week) }, [data.summary.maxWeight])
 
 	let startDate = moment()
 									.subtract(route?.params?.summary?.week, 'weeks')
