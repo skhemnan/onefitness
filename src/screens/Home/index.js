@@ -1,9 +1,10 @@
 import React from 'react';
 import styles from './styles';
 import useConnect from './connect'
+import { RefreshControl } from 'react-native';
 
 // Style
-import { View, Text, Background } from '../../style';
+import { View, Text, Background, colors } from '../../style';
 
 // Components
 import HomeHeader from '../../components/HomeHeader';
@@ -11,7 +12,7 @@ import { SectionList } from 'react-native';
 
 const Home = () => {
 
-	const {workoutData, handleSectionFooter} = useConnect()
+	const {workoutData, handleSectionFooter, refreshing, onRefresh} = useConnect()
 
 	return (
 		<Background style={styles.background}>	
@@ -19,6 +20,7 @@ const Home = () => {
 				{/* <Text h4 bold style={styles.headerText}>Monday, Jan 02</Text> */}
 			</View>
 			<SectionList
+				refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={colors.white}/>}
 				style={styles.container}
 				contentContainerStyle={styles.listContainer}
 				ListHeaderComponent={<HomeHeader/>}

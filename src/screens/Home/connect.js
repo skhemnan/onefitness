@@ -29,7 +29,7 @@ let WORKOUT = useSelector(state => state.Workout)
 const onRefresh = async () => {
 	setRefreshing(true)
 	await getExercises()
-	setRefreshing(false)
+	setTimeout(() => {setRefreshing(false)},2000)
 }
 
 const getExercises = async () => {
