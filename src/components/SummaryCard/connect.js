@@ -20,28 +20,32 @@ export const useConnect = ({item}) => {
 	}
 
 	const markComplete = async () => {
-		let curIndex = Object.keys(PROGRESSION_DATA).indexOf(`${navParams.summary.progression}`)
-		let nextProgress = Object.keys(PROGRESSION_DATA)[curIndex + 1]
-		let exercises = await store.getState().Workout.exercises
-		console.log('EXERCISES', exercises)
-		let found = exercises.findIndex(x => x.id == navParams.id)
-		let newDate = moment(exercises[found].nextWorkoutDate.toDate()).add(7, 'days')
+		try {
+			let curIndex = Object.keys(PROGRESSION_DATA).indexOf(`${navParams.summary.progression}`)
+			let nextProgress = Object.keys(PROGRESSION_DATA)[curIndex + 1]
+			let exercises = await store.getState().Workout.exercises
+			let found = exercises.findIndex(x => x.id == navParams.id)
+			let dateNum = moment(exercises[found].nextWorkoutDate).day()
+			let newDate = moment().add(1, 'week').isoWeekday(dateNum)
 
-		let updatedExercise = {
-			...exercises[found],
-			progress: nextProgress,
-			nextWorkoutDate: firestore.Timestamp.fromDate(new Date(newDate))
+			let updatedExercise = {
+				...exercises[found],
+				progress: nextProgress,
+				nextWorkoutDate: firestore.Timestamp.fromDate(moment(newDate).toDate())
+			}
+
+			let newExercises = exercises.filter(x => x.id != exercises[found].id)
+			newExercises.push(updatedExercise)
+
+			// Send updated exercise to firebase and update on redux	
+			await store.dispatch(setExercises(newExercises))
+			// await firestore().collection('users').doc(uid).update({exercises: newExercises})
+
+			// console.log('CHANGING EXERCISE', exercises[found])
+			// console.log('TO', updatedExercise)	
+		} catch (error) {
+			console.log('MARK COMPLETE ERROR', error, error?.message)	
 		}
-
-		let newExercises = exercises.filter(x => x.id != exercises[found].id)
-		newExercises.push(updatedExercise)
-
-		// Send updated exercise to firebase and update on redux	
-		await store.dispatch(setExercises(newExercises))
-		// await firestore().collection('users').doc(uid).update({exercises: newExercises})
-
-		// console.log('CHANGING EXERCISE', exercises[found])
-		// console.log('TO', updatedExercise)
 
 	}
 	return {markComplete, breakDown}
