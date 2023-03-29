@@ -4,9 +4,12 @@ import {store} from '../../redux/store'
 import firestore from '@react-native-firebase/firestore'
 import moment from 'moment';
 import { setExercises } from '../../redux/action/Workout';
+import { useSelector } from 'react-redux';
 
 
 export const useConnect = ({item}) => {
+
+	const uid = useSelector(state => state.Auth.user.uid)
 
 	const navigation = useNavigation()
 	const navParams = {
@@ -39,7 +42,7 @@ export const useConnect = ({item}) => {
 
 			// Send updated exercise to firebase and update on redux	
 			await store.dispatch(setExercises(newExercises))
-			// await firestore().collection('users').doc(uid).update({exercises: newExercises})
+			await firestore().collection('users').doc(uid).update({exercises: newExercises})
 
 			// console.log('CHANGING EXERCISE', exercises[found])
 			// console.log('TO', updatedExercise)	
