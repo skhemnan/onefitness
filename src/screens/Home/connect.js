@@ -28,12 +28,12 @@ let WORKOUT = useSelector(state => state.Workout)
 
 const onRefresh = async () => {
 	setRefreshing(true)
-	await getExercises()
+	await getExercises(true)
 	setTimeout(() => {setRefreshing(false)},2000)
 }
 
-const getExercises = async () => {
-	if(WORKOUT.exercises.length == 0 || Object.keys(WORKOUT.workouts).length == 0){
+const getExercises = async (force) => {
+	if(WORKOUT.exercises.length == 0 || Object.keys(WORKOUT.workouts).length == 0 || force){
 		await getWorkoutData()
 	}
 }
@@ -41,7 +41,8 @@ const getExercises = async () => {
 useEffect(() => {getExercises()},[])
 useEffect(() => {	
 	if(WORKOUT.exercises.length != 0){
-		setWorkoutData(getData(WORKOUT.exercises, WORKOUT.workouts))	
+		let newData = getData(WORKOUT.exercises, WORKOUT.workouts)
+		setWorkoutData(newData)	
 	}
 },[WORKOUT.exercises])
 
