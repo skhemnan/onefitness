@@ -50,6 +50,9 @@ const HomeStack = () => {
 				headerMode: 'none',
 				gestureDirection: 'vertical',
 				gestureResponseDistance: screenHeight,
+				cardStyle: {
+					backgroundColor: 'transparent'
+				}
 	}
 
 	const stackProps = {
