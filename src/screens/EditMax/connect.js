@@ -21,6 +21,7 @@ export default useConnect = ({route, navigation}) => {
 	}
 
 	const handleUpdate = async () => {
+		try {
 		// Update on Redux
 		let foundWorkout = Object.entries(workouts).findIndex(key => key[1].name == route?.params?.data?.summary?.workout)
 
@@ -28,7 +29,9 @@ export default useConnect = ({route, navigation}) => {
 			if(x.wId == Object.entries(workouts)[foundWorkout][0]){
 				x.max = currentMax,
 				x.progress = 0.5
-				let nextWeek = moment().add(1, 'week').isoWeekday(moment(x.nextWorkoutDate.toDate()).day())
+				let workoutDate = moment(x.nextWorkoutDate.toDate()).day()
+				let nextWeek = moment().add(1, 'week').isoWeekday(workoutDate)
+				console.log('nextWeek', x.nextWorkoutDate.toDate(), workoutDate, nextWeek)
 				x.nextWorkoutDate = firestore.Timestamp.fromDate(moment(nextWeek).toDate())
 				return x
 			} else {
@@ -49,7 +52,10 @@ export default useConnect = ({route, navigation}) => {
 				maxWeight: currentMax,
 				week: 0
 			}
-		})
+		})		
+		} catch (error) {
+			console.log('ERROR UPDATING', error)	
+		}
 	}
 
 	return {handleConfirm, setCurrentMax}
