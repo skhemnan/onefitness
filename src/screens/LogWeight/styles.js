@@ -1,4 +1,4 @@
-import { normalize } from "../../utils";
+import { normalize, normalizeHeight } from "../../utils";
 
 export default styles = {
 	background: {
@@ -12,17 +12,12 @@ export default styles = {
 		marginVertical: 20,
 		alignSelf: 'center'
 	},
-	explanation: {
-		fontSize: normalize(12.5),
-		width: '85%',
-		marginHorizontal: 25,
-		textAlign: 'justify',
-		marginBottom: 20
-	}
-	,
 	button: {
 		maxWidth: '70%',
-		marginVertical: 20,
+		marginTop: '45%',
 		marginHorizontal: 30
-	}
+	},
+	container: {width: '96%', marginTop: '10%'},
+	text: {textAlign: 'center', marginVertical: 10},
+	input: {height: normalizeHeight(60), marginVertical: 15, paddingTop: 10} 
 }

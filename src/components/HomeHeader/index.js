@@ -22,7 +22,7 @@ const HomeHeader = () => {
 				<Text date>{moment().format('MMM DD')}</Text>
 				<View row style={styles.day}>
 					<Text ph>{moment().format('dddd')}</Text>
-					<TouchableOpacity activeOpacity={0.6} onPress={() => navigation.navigate('Settings')}>
+					<TouchableOpacity activeOpacity={0.6} onPress={() => navigation.navigate('SettingsStack')}>
 						{user?.photoURL ? 
 							<Image source={{uri: user?.photoURL}} style={styles.image} resizeMode={'contain'}/>
 							:

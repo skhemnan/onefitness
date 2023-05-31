@@ -1,15 +1,20 @@
-import React, {useRef, useEffect, useState} from 'react';
-import { View, colors, Button } from '../../style'
+import React from 'react';
+import { View, colors, Button, Text, Card, Input } from '../../style'
 import styles from './styles'
+import { useConnect } from './connect';
 
 const LogWeight = ({navigation}) => {
-
+	const {setWeight, sendWeight} = useConnect({navigation})
 	return (
 		<View bg color={colors.darkGrey} style={styles.background}>
-			<View row color={colors.darkGrey} style={styles.header}>
-				<Button body onPress={() => navigation.goBack()} text="Cancel" textStyle={styles.headerText}/>
+			<View center column style={styles.container}>
+				<Text h1 style={styles.text}>Enter your new body weight (lbs)</Text>
+				<Card contact style={styles.input}>
+					<Input onChangeText={x => setWeight(x)}/>
+				</Card>
+				<Text h4 style={styles.text}>This will affect all your body weight exercises.</Text>
 			</View>
-			<Button confirm text="OK" style={styles.button} onPress={() => navigation.goBack()}/>
+			<Button confirm text="SET NEW WEIGHT" style={styles.button} onPress={sendWeight}/>
 		</View>
 	)
 }
