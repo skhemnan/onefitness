@@ -8,7 +8,7 @@ export default BreakdownStats = ({data}) => {
 			<View row style={styles.statsRow}>
 				<View style={styles.statsCol}>
 					<Text h5>{data.workingWeight > 0 ? 'WORKING WEIGHT' : 'ASSISTED WEIGHT'}</Text>
-					<Text h1 color={colors.yellow}>{`${data.workingWeight < 0 ? data.workingWeight * -1 : data.workingWeight}lb`}</Text>
+					<Text h1 color={colors.yellow}>{`${data.workingWeight < 0 ? data.workingWeight * -1 : data.addedWeight == 0 ? data.bodyWeight : data.workingWeight}lb`}</Text>
 				</View>
 				<View style={styles.statsCol}>
 					<Text h5>REP RANGE</Text>
@@ -17,9 +17,9 @@ export default BreakdownStats = ({data}) => {
 				</View>
 			</View>
 			<View>
-				<Text h5 style={styles.weightSplit}>{data.splitWeight ? 'WEIGHT SPLIT' : 'ASSISTED WEIGHT'}</Text>
-				<Text h1 color={colors.yellow} style={styles.weightSplit}>{`${data.splitWeight ? data.splitWeight : data.addedWeight * -1}lb`}{" "}
-				<Text subh>{data.splitWeight ? 'on each side' : 'assistance'}</Text>
+				<Text h5 style={styles.weightSplit}>{data.splitWeight ? 'WEIGHT SPLIT' : (data.addedWeight < 0 ? 'ASSISTED WEIGHT' : 'ADDED WEIGHT')}</Text>
+				<Text h1 color={colors.yellow} style={styles.weightSplit}>{`${data.splitWeight ? data.splitWeight : (data.addedWeight < 0 ? data.addedWeight * -1 : data.addedWeight)}lb`}{" "}
+				<Text subh>{data.splitWeight ? 'on each side' : (data.addedWeight < 0 ? 'assistance' : '')}</Text>
 				</Text>
 			</View>	
 		</>

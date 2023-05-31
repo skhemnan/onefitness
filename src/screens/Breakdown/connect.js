@@ -75,6 +75,7 @@ export default useConnect = ({route}) => {
 			},
 			stats: {
 				...data.stats,
+				bodyWeight: bodyWeight,
 				sets: foundEntry[1].sets,
 				reps: foundEntry[1].reps,
 				workingWeight: Math.ceil(data.summary.maxWeight * parseFloat(foundEntry[0])),
