@@ -7,6 +7,7 @@ import { Button, colors, Text, View, screenHeight } from '../style'
 import Home from '../screens/Home'
 import Breakdown from '../screens/Breakdown'
 import Settings from '../screens/Settings'
+import SettingsStack from './SettingsStack'
 import LearnScreen from '../screens/LearnScreen'
 import { normalize } from '../utils'
 import TrackNewWorkout from '../screens/TrackNewWorkout'
@@ -35,6 +36,26 @@ const HomeStack = () => {
 						</View>
 					)
 				},
+				gestureDirection: 'vertical',
+				gestureResponseDistance: screenHeight
+	}
+
+	const settingsModalProps = {
+				cardOverlayEnabled: true,
+				...TransitionPresets.ModalPresentationIOS,
+				headerStyle: {
+					backgroundColor: colors.darkGrey,
+				},
+				headerTintColor: colors.yellow,
+				headerShadowVisible: false,
+				// header: ({navigation}) => {
+				// 	return (
+				// 		<View row color={colors.darkGrey} style={styles.header}>
+				// 			<Button body onPress={() => navigation.goBack()} text="Done" textStyle={styles.headerText}/>
+				// 		</View>
+				// 	)
+				// },
+				headerShown: false,
 				gestureDirection: 'vertical',
 				gestureResponseDistance: screenHeight
 	}
@@ -71,7 +92,8 @@ const HomeStack = () => {
 		}}>
 			<Stack.Screen name="Home" component={Home} options={{headerShown: false}}/>
 			<Stack.Screen name="Breakdown" component={Breakdown} options={stackProps}/>
-			<Stack.Screen name="Settings" component={Settings} options={largeModalProps}/>
+			{/* <Stack.Screen name="Settings" component={Settings} options={largeModalProps}/> */}
+			<Stack.Screen name="SettingsStack" component={SettingsStack} options={settingsModalProps}/>
 			<Stack.Screen name="LearnScreen" component={LearnScreen} options={smallModalProps}/>
 			<Stack.Screen name="TrackNewWorkout" component={TrackNewWorkout} options={smallModalProps}/>
 			<Stack.Screen name="EditMax" component={EditMax} options={smallModalProps}/>

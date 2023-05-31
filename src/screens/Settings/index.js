@@ -7,7 +7,7 @@ import styles from './styles'
 
 import ContactCard from '../../components/ContactCard'
 
-const Settings = () => {
+const Settings = ({navigation}) => {
 
 	const {user} = useSelector(state => state.Auth)
 
@@ -20,9 +20,7 @@ const Settings = () => {
 	return (
 		<View bg color={colors.darkGrey}>
 			<ContactCard displayName={user?.displayName} email={user?.email} photo={user?.photoURL}/>
-			<Card nav onPress={handleLogout}>
-					<Text h4>Log Weight</Text>
-			</Card>
+			<Card nav onPress={() => navigation.navigate('LogWeight')}><Text h4>Log Weight</Text></Card>
 			<View footer style={styles.logout}>
 				<Card notNav onPress={handleLogout}>
 					<Text h4 color={colors.red}>Log Out</Text>
