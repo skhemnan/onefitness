@@ -1,6 +1,8 @@
 import {useEffect, useState} from 'react'
 import { useSelector } from 'react-redux';
 import { useIsFocused } from '@react-navigation/native';
+import { Alert } from 'react-native';
+
 
 // Constants
 import { PROGRESSION_DATA } from '../../global';
@@ -86,6 +88,18 @@ export default useConnect = ({route}) => {
 		setData(newData)
 	}
 
+	const handleAlert = () => {
+		Alert.alert('Are you sure you want to delete this workout?', 'You will lose all your progress.', [
+			{ text: 'No', style: 'cancel' }, { text: 'Yes', onPress: handleDelete}
+		])
+	}
+
+	const handleDelete = () => {
+		// Delete locally
+		// Delete on Firebase
+		// Navigate back
+	}
+
 	useEffect(() => { updateBreakdown() },[currentNum, data.summary.maxWeight])
 	useEffect(() => { setCurrentNum(data.summary.week) }, [data.summary.maxWeight])
 
@@ -95,5 +109,5 @@ export default useConnect = ({route}) => {
 									.add(route?.params?.summary?.workoutDay, 'days')
 									.format('dddd, MMMM DD YYYY')
 
-	return {startDate, currentNum, setCurrentNum, data}
+	return {startDate, currentNum, setCurrentNum, data, handleAlert}
 }
