@@ -1,7 +1,9 @@
 import {useEffect, useState} from 'react'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useIsFocused } from '@react-navigation/native';
 import { Alert } from 'react-native';
+import { setExercises } from '../../redux/action/Workout';
+import firestore from '@react-native-firebase/firestore'
 
 
 // Constants
@@ -11,10 +13,14 @@ import { PROGRESSION_DATA } from '../../global';
 import { splitWeight, addedWeight } from '../../utils';
 import moment from 'moment';
 
-export default useConnect = ({route}) => {
+export default useConnect = ({route, navigation}) => {
+	console.log('ROUTE PARAMS', route?.params)
 	const isFocused = useIsFocused()
+	const dispatch = useDispatch()
 	
-	const {bodyWeight} = useSelector(state => state.Workout)
+	const {bodyWeight, exercises} = useSelector(state => state.Workout)
+	const uid = useSelector(state => state.Auth.user.uid)
+
 	const [currentNum, setCurrentNum] = useState(route?.params?.summary?.week)
 	const [data, setData] = useState({
 				summary: route?.params?.summary,
@@ -94,10 +100,18 @@ export default useConnect = ({route}) => {
 		])
 	}
 
-	const handleDelete = () => {
+	const handleDelete = async () => {
 		// Delete locally
-		// Delete on Firebase
-		// Navigate back
+		let found = exercises.findIndex(x => x.id == route?.params?.id)
+		if(found != -1){
+			console.log('FOUND THE ONE TO DELETE', exercises[found])
+			let newExercises = exercises.filter(x => x.id != exercises[found].id)
+			dispatch(setExercises(newExercises))
+			// Delete on Firebase
+			await firestore().collection('users').doc(uid).update({exercises: newExercises})
+			// Navigate back
+			navigation.goBack()
+		}
 	}
 
 	useEffect(() => { updateBreakdown() },[currentNum, data.summary.maxWeight])

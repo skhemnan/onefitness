@@ -12,8 +12,8 @@ import BreakdownDisclaimer from '../../components/BreakdownDisclaimer';
  
 const Breakdown = ({route}) => {
 
-	const {startDate, currentNum, setCurrentNum, data} = useConnect({route})
 	const navigation = useNavigation()
+	const {startDate, currentNum, setCurrentNum, data, handleAlert} = useConnect({route, navigation})
 
 	onEditMax = () => {navigation.navigate('EditMax', {data: data})}
 
@@ -23,7 +23,7 @@ const Breakdown = ({route}) => {
 				<Ribbon currentNum={currentNum} setCurrentNum={setCurrentNum}/>
 				<BreakdownSummary data={data.summary} onEditMax={onEditMax}/>
 				<BreakdownStats data={data.stats}/>
-				<BreakdownDisclaimer date={startDate} progress={route?.params?.summary?.progression}/>
+				<BreakdownDisclaimer date={startDate} progress={route?.params?.summary?.progression} handlePress={handleAlert}/>
 			</View>
 		</Background>
 	)
