@@ -8,26 +8,13 @@ import styles from './styles'
 import moment from 'moment';
 import firestore from '@react-native-firebase/firestore'
 import { v4 as uuidv4 } from 'uuid';
+import useConnect from './connect'
 
 // Components
 import WorkoutSlider from '../../components/WorkoutSlider';
 import WorkoutCounter from '../../components/WorkoutCounter';
 
 const TrackNewWorkout = ({navigation}) => {
-
-	const {workouts, bodyWeight} = useSelector(state => state.Workout)
-
-	const [sliderChoice, setSliderChoice] = useState(1)
-	const [counter, setCounter] = useState(1)
-	const [data, setData] = useState({
-		id: uuidv4(), // new uuid,
-		max: 0,
-		nextWorkoutDate: firestore.Timestamp.fromDate(moment().add(1, 'week').toDate()),
-		progress: 0.5,
-		wId: '', // workout ID
-		workoutName: '',
-		startingWeights: {}
-	})
 
 	// Animations
 	screenOneTranslate = useRef(new Animated.Value(0)).current
@@ -55,35 +42,21 @@ const TrackNewWorkout = ({navigation}) => {
 		moveScreenFour(0)
 	}
 
-	const handleStepOne = (workout) => {
-		const newData = {
-			...data,
-			wId: workout[0],
-			workoutName: workout[1].name,
-			startingWeights: workout[1].startingWeights
-		}
-		setData(newData)
-		toScreenTwo()
-	}
+	const {
+		addWorkout, 
+		workouts, 
+		setSliderChoice, 
+		sliderChoice,
+		counter,
+		setCounter,
+		data,
+		handleStepOne,
+		handleStepThree
+	} = useConnect({navigation, toScreenTwo, toScreenThree, toScreenFour})
+	const exercises = useSelector(state => state.Workout.exercises)
 
-	const handleStepThree = () => {
-		let testWeight = data.startingWeights[`${sliderChoice}`]
-		let maxWeight = 0
-		console.log('BODY WEIGHT', bodyWeight)
-		if(data.wId == 'kRrYdGp5JqEsF0vI7qEH'){
-			maxWeight = Math.ceil(2.5 * Math.ceil(((((bodyWeight + testWeight)*counter)*0.0333) + bodyWeight)/2.5))
-		} else {
-			maxWeight = 5 * Math.ceil((((testWeight * counter) * 0.0333) + testWeight)/5)
-		}
-
-		const newData = {
-			...data,
-			max: maxWeight	
-		}
-
-		setData(newData)
-		toScreenFour()
-	}
+	console.log('WORKOUTS', workouts)
+	console.log('EXERCISES', exercises)
 
 	return (
 		<View bg color={colors.darkGrey} style={styles.background}>
@@ -99,7 +72,6 @@ const TrackNewWorkout = ({navigation}) => {
 						return <Button confirm text={x[1].name} style={styles.button} onPress={() => handleStepOne(x)}/>
 					})}
 				</Animated.View>
-
 				{/* Screen 2 */}
 				<Animated.View column style={[styles.container, {transform: [{translateX: screenTwoTranslate}]}]}>
 					<Text h1 style={styles.heading}>Describe your experience with {" "}
@@ -113,24 +85,22 @@ const TrackNewWorkout = ({navigation}) => {
 						onPress={() => toScreenThree()}
 					/>
 				</Animated.View>
-
 				{/* Screen 3 */}
 				<Animated.View column style={[styles.container, {transform: [{translateX: screenThreeTranslate}]}]}>
 					<Text h1 style={[styles.heading, {marginTop: -5, marginBottom: '9%'}]}>Based on your selection, we think you should test {" "}
 						<Text h1 style={[styles.heading, {textDecorationLine: 'underline'}]}>
-							{`${data.startingWeights[`${sliderChoice}`] != 0 ? data.startingWeights[`${sliderChoice}`] : 'your body weight.'}${data.wId == 'kRrYdGp5JqEsF0vI7qEH' ? (data.startingWeights[sliderChoice] != 0 ? 'lb assistance.' : '') : 'lb.'}`}
+							{`${data.startingWeights[`${sliderChoice}`] != 0 ? data.startingWeights[`${sliderChoice}`] : 'your body weight.'}${data.wId == 'kRrYdGp5JqEsF0vI7qEH' ? (data.startingWeights[sliderChoice] < 0 ? 'lb assistance.' : '') : 'lb.'}`}
 						</Text>
 					</Text>
 					<Text h3 style={styles.subheading}>enter the # of reps you can lift</Text>
 					<WorkoutCounter counter={counter} setCounter={setCounter}/>
 					<Button confirm text="done" style={styles.button} onPress={handleStepThree}/>
 				</Animated.View>
-
 				{/* Screen 4 */}
 				<Animated.View column style={[styles.container, {transform: [{translateX: screenFourTranslate}]}]}>
 					<Text h1 style={[styles.heading, {marginBottom: '5%'}]}>Great work! your new one rep max is {data.max}lb!</Text>
 					<Text h4 style={[styles.subheading, {marginBottom: '35%'}]}>We'll design a new program for you to follow.</Text>
-					<Button confirm text="lets go!" style={styles.button} onPress={() => navigation.goBack()}/>
+					<Button confirm text="lets go!" style={styles.button} onPress={addWorkout}/>
 				</Animated.View>
 		</View>
 	)
