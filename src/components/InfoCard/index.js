@@ -12,7 +12,7 @@ const InfoCard = ({item}) => {
 
 	const navigation = useNavigation()
 	const barbellRef = useRef(new Animated.Value(0))
-	useEffect(() => {barbellRef.current?.play(0,100)}, [])
+	useEffect(() => {barbellRef.current?.play(0,50)}, [])
 
 	return (
 			<Card info>
@@ -21,8 +21,8 @@ const InfoCard = ({item}) => {
 						useNativeDriver 
 						ref={barbellRef} 
 						source={require('../../assets/lottie/barbell.json')} 
-						loop 
-						autoPlay={false}
+						loop={false}
+						// autoPlay
 						duration={4000}
 						height={'120%'}
 						width={'120%'}
