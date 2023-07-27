@@ -14,7 +14,6 @@ import { splitWeight, addedWeight } from '../../utils';
 import moment from 'moment';
 
 export default useConnect = ({route, navigation}) => {
-	console.log('ROUTE PARAMS', route?.params)
 	const isFocused = useIsFocused()
 	const dispatch = useDispatch()
 	
@@ -101,16 +100,19 @@ export default useConnect = ({route, navigation}) => {
 	}
 
 	const handleDelete = async () => {
+		try {
 		// Delete locally
-		let found = exercises.findIndex(x => x.id == route?.params?.id)
+	  let found = exercises.findIndex(x => x.id == route?.params?.id)
 		if(found != -1){
-			console.log('FOUND THE ONE TO DELETE', exercises[found])
 			let newExercises = exercises.filter(x => x.id != exercises[found].id)
 			dispatch(setExercises(newExercises))
 			// Delete on Firebase
 			await firestore().collection('users').doc(uid).update({exercises: newExercises})
 			// Navigate back
 			navigation.goBack()
+		}	
+		} catch (error) {
+			console.log('ERROR DELETING', error.message, error)	
 		}
 	}
 
