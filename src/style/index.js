@@ -444,6 +444,10 @@ const Card = (props) => {
 				width:normalize(200), 
 				marginLeft: 10, 
 			},
+			onboard: {
+				width:normalize(200), 
+				alignSelf: 'center'
+			},
 			footer: {position: 'absolute', bottom: 2, right: 15},
 			navArrow: {position: 'absolute', bottom: 10, right: 0}
 		}
@@ -465,10 +469,10 @@ const Card = (props) => {
 				{props.children}
 
 				{/* Footer */}
-				{props.action &&
+				{(props.action || props.button) &&
 					<View style={styles.actionFooter}>
 						{props.button &&
-							<Touchable actionS text={props.button} style={styles.button} onPress={props.onButton}/>	
+							<Touchable actionS text={props.button} style={props.onboard ? styles.onboard : styles.button} onPress={props.onButton}/>	
 						}
 					</View>		
 				}

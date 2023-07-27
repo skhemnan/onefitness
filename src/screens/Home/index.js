@@ -14,6 +14,8 @@ const Home = () => {
 
 	const {workoutData, handleSectionFooter, refreshing, onRefresh} = useConnect()
 
+	console.log('WORKOUT DATA', workoutData)
+
 	return (
 		<Background style={styles.background}>	
 			<View style={styles.header} center>
@@ -25,7 +27,11 @@ const Home = () => {
 				contentContainerStyle={styles.listContainer}
 				ListHeaderComponent={<HomeHeader/>}
 				sections={workoutData}	
-				renderSectionHeader={({section}) => <Text sh style={styles.sectionTitle}>{section.title}</Text>}
+				renderSectionHeader={({section}) => {
+					if(section.title != ''){
+						return <Text sh style={styles.sectionTitle}>{section.title}</Text>
+					}
+				}}
 				renderSectionFooter={handleSectionFooter}
 				stickySectionHeadersEnabled={false}
 				renderItem={({section}) => <>{section.renderItem}</>}
