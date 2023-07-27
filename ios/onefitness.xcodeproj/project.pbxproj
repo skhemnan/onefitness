@@ -20,9 +20,9 @@
 		8C7EF0EEE089411BB1EDE259 /* Inter-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 33BFCFBFC71E41C4B2B2042B /* Inter-ExtraLight.ttf */; };
 		9AB810A3157946E0BF824693 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C21E1944417433ABE0C6AE9 /* Inter-Regular.ttf */; };
 		B43C2C76410A4D91B98D96EE /* Inter-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB16FE98CA3A4DFC93630272 /* Inter-Thin.ttf */; };
-		CC5B980C29D20EB6006D6FDA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC5B980B29D20EB6006D6FDA /* Assets.xcassets */; };
 		CC637C7D296B725600FAF9A4 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC637C7C296B725600FAF9A4 /* Launch Screen.storyboard */; };
 		CC644ECE2A26E14E0059FE40 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CC644ECD2A26E14E0059FE40 /* GoogleService-Info.plist */; };
+		CC8C325B2A72455E00559C38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC8C325A2A72455E00559C38 /* Assets.xcassets */; };
 		D4023EC757DC456CAC33DE1E /* Inter-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16BB70743F3347CEA0915DB9 /* Inter-Black.ttf */; };
 /* End PBXBuildFile section */
 
@@ -58,9 +58,9 @@
 		89C6BE57DB24E9ADA2F236DE /* Pods-onefitness-onefitnessTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-onefitness-onefitnessTests.release.xcconfig"; path = "Target Support Files/Pods-onefitness-onefitnessTests/Pods-onefitness-onefitnessTests.release.xcconfig"; sourceTree = "<group>"; };
 		8C18403C83D648D4906D176B /* Inter-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Light.ttf"; path = "../src/assets/fonts/Inter-Light.ttf"; sourceTree = "<group>"; };
 		C67944A65CAD4E79AFCDD113 /* Inter-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-ExtraBold.ttf"; path = "../src/assets/fonts/Inter-ExtraBold.ttf"; sourceTree = "<group>"; };
-		CC5B980B29D20EB6006D6FDA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../../Downloads/OneFitness/AppIcons (1)/Assets.xcassets"; sourceTree = "<group>"; };
 		CC637C7C296B725600FAF9A4 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		CC644ECD2A26E14E0059FE40 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CC8C325A2A72455E00559C38 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../Downloads/1Projects/OneFitness/Icon/AppIcons/Assets.xcassets; sourceTree = "<group>"; };
 		DB16FE98CA3A4DFC93630272 /* Inter-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Thin.ttf"; path = "../src/assets/fonts/Inter-Thin.ttf"; sourceTree = "<group>"; };
 		E46AB62C17624EC092A59E20 /* Inter-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Medium.ttf"; path = "../src/assets/fonts/Inter-Medium.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -107,7 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				CC644ECD2A26E14E0059FE40 /* GoogleService-Info.plist */,
-				CC5B980B29D20EB6006D6FDA /* Assets.xcassets */,
+				CC8C325A2A72455E00559C38 /* Assets.xcassets */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
@@ -291,7 +291,7 @@
 				595528103D3B455AA8475259 /* Inter-Medium.ttf in Resources */,
 				9AB810A3157946E0BF824693 /* Inter-Regular.ttf in Resources */,
 				4644B9699CBA4A8E8499CBAA /* Inter-SemiBold.ttf in Resources */,
-				CC5B980C29D20EB6006D6FDA /* Assets.xcassets in Resources */,
+				CC8C325B2A72455E00559C38 /* Assets.xcassets in Resources */,
 				B43C2C76410A4D91B98D96EE /* Inter-Thin.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
