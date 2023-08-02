@@ -46,7 +46,6 @@ useEffect(() => {getExercises()},[])
 useEffect(() => {	
 
 	let newData = getData(WORKOUT.exercises, WORKOUT.workouts)
-	console.log('NEWDATA', newData)
 	setWorkoutData(newData)	
 
 	// if(WORKOUT.exercises.length != 0){
